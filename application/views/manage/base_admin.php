@@ -7,12 +7,12 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="">
-        <title>GOMEID | Admin</title>
+        <title>Onepage | Admin</title>
 
         <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet"> 
         <link href="<?php echo base_url() ?>assets/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>assets/css/theme/admin.css" rel="stylesheet">
-        <link href="<?php echo base_url() ?>assets/css/theme/metisMenu.min.css" rel="stylesheet"> 
+        <link href="<?php echo base_url() ?>assets/css/theme/metisMenu.css" rel="stylesheet"> 
         <link href="<?php echo base_url() ?>assets/css/theme/style.css" rel="stylesheet">
     </head>
     <!--main content-->
@@ -47,12 +47,14 @@
                                     <i class="fa fa-user fa-fw"></i>primawn<label class="label-user"></label>&nbsp;<i class="fa fa-caret-down"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="<?php echo site_url('admin/profil') ?>"><i class="fa fa-user fa-fw"></i> Edit Profil</a>
+                                    <li><a href="<?php echo site_url('manage/user/profile') ?>"><i class="fa fa-user fa-fw"></i> Edit Profil</a>
                                     </li>
-                                    <li><a href="<?php echo site_url('bantuan/manual') ?>"><i class="fa fa-question-circle fa-fw"></i> Bantuan</a>
+                                    <li><a href="<?php echo site_url('manage/user/set_pass') ?>"><i class="fa fa-key fa-fw"></i> Ubah Password</a>
+                                    </li>
+                                    <li><a href="#"><i class="fa fa-question-circle fa-fw"></i> Bantuan</a>
                                     </li>
                                     <li class="divider"></li>
-                                    <li><a href="<?php echo site_url('auth/logout') ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                    <li><a href="<?php echo site_url('manage/user/logout') ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                                     </li>
                                 </ul>
                                 <!-- /.dropdown-user -->
@@ -73,16 +75,33 @@
                                         class="active"<?php } ?>
                                         href="<?php echo site_url('manage/dashboard') ?>"><i class="fa fa-desktop"></i> <span class="nav-label">Dashboard</span></a>
                                 </li>
+                                <label class="navig-group">Contents</label>
                                 <li><a <?php if ($this->uri->segment(2) == 'information') { ?>
                                         class="active"<?php } ?> href="<?php echo site_url('manage/information') ?>"><i class="fa fa-sticky-note-o"></i> <span class="nav-label">Informasi</span></a></li>
-                               
+                                <li><a <?php if ($this->uri->segment(2) == 'video') { ?>
+                                        class="active"<?php } ?> href="<?php echo site_url('manage/video') ?>"><i class="fa fa-toggle-right"></i> <span class="nav-label">Video</span></a></li>
+                                <li><a <?php if ($this->uri->segment(2) == 'event') { ?>
+                                        class="active"<?php } ?> href="<?php echo site_url('manage/event') ?>"><i class="fa fa-calendar-o"></i> <span class="nav-label">Event</span></a></li>
+                                <li <?php if ($this->uri->segment(2) == 'template') { ?>
+                                    class="active"<?php } ?>>
+                                    <a href="<?php echo site_url('manage/seting') ?>"><i class="fa fa-align-justify"></i> <span class="nav-label">Lainnya</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li><a <?php if ($this->uri->segment(3) == 'brand') { ?>
+                                                class="active"<?php } ?> href="#">Partners</a></li>
+                                    </ul>
+                                </li>
+
                                 <label class="navig-group">Settings</label>
                                 <li <?php if ($this->uri->segment(2) == 'template') { ?>
                                     class="active"<?php } ?>>
                                     <a href="<?php echo site_url('manage/seting') ?>"><i class="fa fa-laptop"></i> <span class="nav-label">Template</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li><a <?php if ($this->uri->segment(3) == 'brand') { ?>
-                                                class="active"<?php } ?> href="#">Brand</a></li>
+                                                class="active"<?php } ?> href="#">Brand Logo</a></li>
+                                        <li><a <?php if ($this->uri->segment(3) == 'banner') { ?>
+                                                class="active"<?php } ?> href="#">Banner</a></li>
+                                        <li><a <?php if ($this->uri->segment(3) == 'banner') { ?>
+                                                class="active"<?php } ?> href="<?php echo site_url('manage/information') ?>">Halaman</a></li>
                                     </ul>
                                 </li>
                                 <li <?php if ($this->uri->segment(2) == 'situs') { ?>
@@ -98,18 +117,24 @@
                     </div>
                 </div>
             </nav>
-            <?php $this->load->view($child_template) ?>
+            <div id="page-wrapper">
+                <?php $this->load->view($child_template) ?>
+                <div class="footer" style="position: fixed; bottom: 0; background-color: #e7eaec; border-top: 1px solid #d7d6dc; width: 100%; margin-left: -25px; padding: 7.5px 30px">
+                    onePage Admin Template - gomeID
+                </div>
+            </div>
         </div>
+
         <!-- /#wrapper -->
         <!--end of footer-->
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
-        <script src="//cdn.ckeditor.com/4.6.1/full/ckeditor.js"></script>
+        <script src="//cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery.slimscroll.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/theme/metisMenu.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/theme/admin.js"></script>
         <script>
-            CKEDITOR.replace( 'ck_description_field' );
+            CKEDITOR.replace('ck_description_field');
         </script>
     </body><!--end of main content-->
 </html>

@@ -3,10 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once 'application/controllers/manage/Base.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-class Information extends AppBase {
+class Event extends AppBase {
 
     public function __construct() {
         parent::__construct();
@@ -16,45 +13,15 @@ class Information extends AppBase {
         $this->load->model('page_model', 'page');
     }
 
-    public function sendMail() {
-
-        $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
-        try {
-            //Server settings
-            $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-            $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = 'lab.gomein@gmail.com';                 // SMTP username
-            $mail->Password = 'gomelab26';                           // SMTP password
-            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-            $mail->Port = 587;                                    // TCP port to connect to
-            //Recipients
-            $mail->setFrom('lab.gomein@gmail.com', 'Mailer');
-            $mail->addAddress('nugrahapwid@gmail.com');               // Name is optional
-            $mail->addReplyTo('lab.gomein@gmail.com', 'Information');
-
-            //Content
-            $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Here is the subject';
-            $mail->Body = 'This is the HTML message body <b>in bold!</b>';
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-            $mail->send();
-        } catch (Exception $e) {
-            echo 'Message could not be sent.';
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
-        }
-    }
-
     public function index() {
-        $data['page'] = $this->page->get_info('informasi');
-        $this->admindisplay('manage/information', $data);
+        $data['page'] = $this->page->get_info('event');
+        $this->admindisplay('manage/event', $data);
     }
 
     public function view($id = "") {
         if (is_numeric($id)) {
             $data['page'] = $this->page->get_view_info($id);
-            $this->admindisplay('manage/information_edit', $data);
+            $this->admindisplay('manage/event_edit', $data);
         } else {
             show_404();
         }
@@ -66,7 +33,7 @@ class Information extends AppBase {
         $this->form_validation->set_rules('rel_url', 'Link Halaman', 'trim|required');
 
         if ($this->form_validation->run() === FALSE) {
-            $this->admindisplay('manage/information_add');
+            $this->admindisplay('manage/event_add');
         } else {
 
             $params = array(
@@ -83,7 +50,7 @@ class Information extends AppBase {
             } else {
                 $this->_result_msg('success', 'Data baru telah ditambahkan');
             }
-            redirect('manage/information');
+            redirect('manage/event');
         }
     }
 
@@ -100,7 +67,7 @@ class Information extends AppBase {
             $this->form_validation->set_rules('rel_url', 'Link Halaman', 'trim|required');
 
             if ($this->form_validation->run() === FALSE) {
-                $this->admindisplay('manage/information_edit_f', $data);
+                $this->admindisplay('manage/event_edit_f', $data);
             } else {
                 $params = array(
                     'title' => $this->input->post('title', TRUE),
@@ -115,10 +82,10 @@ class Information extends AppBase {
                     $this->_result_msg('success', 'Data berhasil diubah');
                     //$data['page'] = $this->page->get_view_info($id);
                 }
-                redirect('manage/information/edit/' . $id);
+                redirect('manage/event/edit/' . $id);
             }
         } else {
-            $this->admindisplay('manage/information_edit', $data);
+            $this->admindisplay('manage/event_edit', $data);
         }
     }
 
@@ -129,7 +96,7 @@ class Information extends AppBase {
         } else {
             $this->_result_msg('danger', 'Gagal menghapus data');
         }
-        redirect('manage/information');
+        redirect('manage/event');
     }
 
 }

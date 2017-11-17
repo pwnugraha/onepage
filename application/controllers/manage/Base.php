@@ -7,9 +7,7 @@ class AppBase extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        /* if($this->session->userdata('is_logged_in') ==1){
-          redirect('form','refresh');
-          } */
+        $this->_is_logged_in();
     }
 
     function admindisplay($child_view = "", $data = array()) {
@@ -22,6 +20,13 @@ class AppBase extends CI_Controller {
                     'msg' => $msg,
                     'alert' => 'alert-' . $alert
         ));
+    }
+    
+    function _is_logged_in(){
+        $auth = $this->session->userdata('is_logged_in');
+        if(!isset($auth) || $auth != TRUE){
+            redirect('auth/admin');
+        }
     }
 
 }
