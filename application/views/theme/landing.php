@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,13 +21,13 @@
         <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
 
         <!-- Custom styles for this template -->
-        <link href="<?php echo base_url()?>assets/laundry-in/css/style.min.css" rel="stylesheet">
+        <link href="<?php echo base_url() ?>assets/laundry-in/css/style.min.css" rel="stylesheet">
     </head>
 
     <body id="page-top">
 
         <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" style="background-color: #059087">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="#page-top">Laundry-in</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fa fa-bars"></i>
@@ -49,22 +52,22 @@
         </nav>
 
         <!-- Intro Header -->
-        <header class="masthead">
+        <header class="masthead" style="background-image: <?php echo 'url(' . base_url() . $theme[0]['dir'] . $theme[0]['name'] . ')'; ?>">
             <div class="intro-body">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 mx-auto">
-                            <h1 class="brand-heading">Laundry-in</h1>
-                            <p class="intro-text">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. estibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. estibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.</p>
+                            <h1 class="brand-heading"><?php echo $theme_contents_title[0]['value'] ?></h1>
+                            <p class="intro-text"><?php echo $theme_contents[0]['value'] ?></p>
                             <a href="#about" class="btn btn-circle js-scroll-trigger">
                                 <i class="fa fa-angle-double-down animated"></i>
                             </a>
                             <div class="text-center">
                                 <a class="button-img" href="https://itunes.apple.com/pl/genre/ios/id36?mt=8" target="_blank">
-                                    <img src="<?php echo base_url()?>assets/laundry-in/img/icon-btn/button-app-store.png" alt="App Store" width="175" height="60" />
+                                    <img src="<?php echo base_url() ?>assets/laundry-in/img/icon-btn/button-app-store.png" alt="App Store" width="175" height="60" />
                                 </a> 
                                 <a class="button-img" href="https://play.google.com/store/apps" target="_blank">
-                                    <img src="<?php echo base_url()?>assets/laundry-in/img/icon-btn/button-google-play.png" alt="Google Play" width="175" height="60" />
+                                    <img src="<?php echo base_url() ?>assets/laundry-in/img/icon-btn/button-google-play.png" alt="Google Play" width="175" height="60" />
                                 </a>
                             </div>
                         </div>
@@ -78,22 +81,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2>About Laundry-in</h2>
-                        <p>Laundry-in is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
-                            <a href="#">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
+                        <h2><?php echo $theme_contents_title[1]['value'] ?></h2>
+                        <p><?php echo $theme_contents[1]['value'] ?></p>
 
                         <!-- Craousel -->
                         <div id="carouselControlsAbout" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner" role="listbox">
-                                <div class="carousel-item active">
-                                    <img class="d-block img-fluid" src="<?php echo base_url()?>assets/laundry-in/img/img-slide/slide-en-1-XL.jpg" alt="First slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block img-fluid" src="<?php echo base_url()?>assets/laundry-in/img/img-slide/slide-en-2-XL.jpg" alt="Second slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block img-fluid" src="<?php echo base_url()?>assets/laundry-in/img/img-slide/slide-en-3-XL.jpg" alt="Third slide">
-                                </div>
+                                <?php foreach ($banner_section_1 as $k => $v) { ?>
+                                    <div class="carousel-item <?php echo $k == 0 ? "active" : ""; ?>">
+                                        <img class="d-block img-fluid" src="<?php echo base_url().$v['dir'].$v['name'] ?>" alt="slide">
+                                    </div>
+                                <?php } ?>
                             </div>
                             <a class="carousel-control-prev" href="#carouselControlsAbout" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -110,26 +108,21 @@
         </section>
 
         <!-- Article Section -->
-        <section id="article" class="content-section text-center">
+        <section id="article" class="content-section text-center" style="background-color: #58cbc4">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2>Article Laundry-in</h2>
-                        <p>Laundry-in is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
-                            <a href="#">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
+                        <h2><?php echo $theme_contents_title[2]['value'] ?></h2>
+                        <p><?php echo $theme_contents[2]['value'] ?></p>
 
                         <!-- Craousel -->
                         <div id="carouselControls" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner" role="listbox">
-                                <div class="carousel-item active">
-                                    <img class="d-block img-fluid" src="<?php echo base_url()?>assets/laundry-in/img/img-slide/tablet-personalizacja-en-1-XL.png" alt="First slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block img-fluid" src="<?php echo base_url()?>assets/laundry-in/img/img-slide/tablet-personalizacja-en-2-XL.png" alt="Second slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block img-fluid" src="<?php echo base_url()?>assets/laundry-in/img/img-slide/tablet-personalizacja-en-3-XL.png" alt="Third slide">
-                                </div>
+                               <?php foreach ($banner_section_2 as $k => $v) { ?>
+                                    <div class="carousel-item <?php echo $k == 0 ? "active" : ""; ?>">
+                                        <img class="d-block img-fluid" src="<?php echo base_url().$v['dir'].$v['name'] ?>" alt="slide">
+                                    </div>
+                                <?php } ?>
                             </div>
                             <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -146,7 +139,7 @@
         </section>
 
         <!-- Download Section -->
-        <section id="download" class="download-section content-section text-center">
+        <section id="download" class="download-section content-section text-center" style="background-image: <?php echo 'url(' . base_url() . $theme[1]['dir'] . $theme[1]['name'] . ')'; ?>">
             <div class="container">
                 <div class="col-lg-8 mx-auto">
                     <h2>Download Aplikasi Laundry-in</h2>
@@ -157,7 +150,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="contact-section content-section text-center">
+        <section id="contact" class="contact-section content-section text-center" style="background-image: <?php echo 'url(' . base_url() . $theme[2]['dir'] . $theme[2]['name'] . ')'; ?>">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">

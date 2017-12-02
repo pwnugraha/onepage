@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <?php if ($this->session->flashdata('msg')) { ?>
-            <div class="alert <?php echo $this->session->flashdata('alert') ?>  alert-dismissible" style="margin-bottom: 0" role="alert">
+            <div class="alert <?php echo $this->session->flashdata('alert') ?>  alert-dismissible" style="margin-bottom: 0; margin-top: 20px" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong><?php echo $this->session->flashdata('msg') ?></strong>
             </div>

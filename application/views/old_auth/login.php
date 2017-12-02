@@ -1,6 +1,3 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,6 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </head>
 
     <body>
+
         <!-- Top content -->
         <div class="top-content">
             <div class="inner-bg">
@@ -35,39 +33,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="form-top-left">
                                     <h3>Login</h3>
                                     <span>Masukkan username dan password:</span>
-                                    <div id="infoMessage"><span class="text-danger"><?php echo $message; ?></span></div>
+                                    <span class="text-danger"><br><?php echo $this->session->flashdata('login_msg')?></span>
                                 </div>
                                 <div class="form-top-right">
                                     <i class="fa fa-lock"></i>
                                 </div>
                             </div>
                             <div class="form-bottom">
-                                <?php echo form_open("auth/login", 'class="login-form"'); ?>
-                                <div class="form-group">
-                                    <label class="sr-only" for="form-username">Username</label>
-                                    <?php echo form_input($identity, '', 'class="form-username form-control" placeholder="Username..."'); ?>
-                                </div>
-
-                                <div class="form-group">
+                                <?php echo form_open('auth/login', 'class="login-form"');?>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-username">Username</label>
+                                        <input type="text" name="username" placeholder="Username..." class="form-username form-control" id="username">
+                                    </div>
+                                    <div class="form-group">
                                         <label class="sr-only" for="form-password">Password</label>
-                                    <?php echo form_input($password, '', 'class="form-username form-control" placeholder="Password..."'); ?>
-                                </div>
-
-                                <p>
-                                    <?php echo lang('login_remember_label', 'remember'); ?>
-                                    <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"'); ?>
-                                </p>
-
-
-                                <button type="submit" class="btn">Sign in!</button>
-
-                                <?php echo form_close(); ?>
+                                        <input type="password" name="password" placeholder="Password..." class="form-password form-control" id="password">
+                                    </div>
+                                    <button type="submit" class="btn">Sign in!</button>
+                                <?php echo form_close();?>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3 social-login">
-                            <a href="forgot_password"><h4><?php echo lang('login_forgot_password'); ?></h4></a>
+                            <a href="#"><h4>Lupa Password ?</h4></a>
                         </div>
                     </div>
                 </div>

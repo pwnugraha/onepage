@@ -3,10 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once 'application/controllers/manage/Base.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-class Information extends AppBase {
+class Page extends AppBase {
 
     public function __construct() {
         parent::__construct();
@@ -14,36 +11,6 @@ class Information extends AppBase {
           redirect('form','refresh');
           } */
         $this->load->model('page_model', 'page');
-    }
-
-    public function sendMail() {
-
-        $mail = new PHPMailer(true);                              // Passing `true` enables exceptions
-        try {
-            //Server settings
-            $mail->isSMTP();                                      // Set mailer to use SMTP
-            $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
-            $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = 'lab.gomein@gmail.com';                 // SMTP username
-            $mail->Password = 'gomelab26';                           // SMTP password
-            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-            $mail->Port = 587;                                    // TCP port to connect to
-            //Recipients
-            $mail->setFrom('lab.gomein@gmail.com', 'Mailer');
-            $mail->addAddress('nugrahapwid@gmail.com');               // Name is optional
-            $mail->addReplyTo('lab.gomein@gmail.com', 'Information');
-
-            //Content
-            $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Here is the subject';
-            $mail->Body = 'This is the HTML message body <b>in bold!</b>';
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-            $mail->send();
-        } catch (Exception $e) {
-            echo 'Message could not be sent.';
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
-        }
     }
 
     public function index() {

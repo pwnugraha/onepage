@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,6 +17,13 @@
         <link href="<?php echo base_url() ?>assets/css/theme/admin.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>assets/css/theme/metisMenu.css" rel="stylesheet"> 
         <link href="<?php echo base_url() ?>assets/css/theme/style.css" rel="stylesheet">
+        <?php
+        if (!empty($assets_header)) {
+            foreach ($assets_header as $asset) {
+                echo $asset;
+            }
+        }
+        ?>
     </head>
     <!--main content-->
     <body class="fixed-sidebar fixed-nav">
@@ -44,17 +54,20 @@
                             </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding-left: 10px; padding-right: 10px">
-                                    <i class="fa fa-user fa-fw"></i>primawn<label class="label-user"></label>&nbsp;<i class="fa fa-caret-down"></i>
+                                    <i class="fa fa-user fa-fw"></i><?php echo $this->ion_auth->user()->row()->username ?><label class="label-user"></label>&nbsp;<i class="fa fa-caret-down"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="<?php echo site_url('manage/user/profile') ?>"><i class="fa fa-user fa-fw"></i> Edit Profil</a>
-                                    </li>
-                                    <li><a href="<?php echo site_url('manage/user/set_pass') ?>"><i class="fa fa-key fa-fw"></i> Ubah Password</a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-question-circle fa-fw"></i> Bantuan</a>
+                                    <li><a href="#"><?php echo $this->ion_auth->user()->row()->first_name . " " . $this->ion_auth->user()->row()->last_name ?></a>
                                     </li>
                                     <li class="divider"></li>
-                                    <li><a href="<?php echo site_url('manage/user/logout') ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                                    <li><a href="<?php echo site_url('auth/edit_user') ?>"><i class="fa fa-user fa-fw"></i> Edit Profil</a>
+                                    </li>
+                                    <li><a href="<?php echo site_url('auth/change_password') ?>"><i class="fa fa-key fa-fw"></i> Ubah Password</a>
+                                        <!--                                    </li>
+                                                                            <li><a href="#"><i class="fa fa-question-circle fa-fw"></i> Bantuan</a>
+                                                                            </li>-->
+                                    <li class="divider"></li>
+                                    <li><a href="<?php echo site_url('auth/logout') ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                                     </li>
                                 </ul>
                                 <!-- /.dropdown-user -->
@@ -72,44 +85,54 @@
                             <ul class="nav in" id="side-menu">
                                 <li>
                                     <a <?php if ($this->uri->segment(2) == 'dashboard') { ?>
-                                        class="active"<?php } ?>
+                                            class="active"<?php } ?>
                                         href="<?php echo site_url('manage/dashboard') ?>"><i class="fa fa-desktop"></i> <span class="nav-label">Dashboard</span></a>
                                 </li>
                                 <label class="navig-group">Contents</label>
                                 <li><a <?php if ($this->uri->segment(2) == 'information') { ?>
-                                        class="active"<?php } ?> href="<?php echo site_url('manage/information') ?>"><i class="fa fa-sticky-note-o"></i> <span class="nav-label">Informasi</span></a></li>
-                                <li><a <?php if ($this->uri->segment(2) == 'video') { ?>
-                                        class="active"<?php } ?> href="<?php echo site_url('manage/video') ?>"><i class="fa fa-toggle-right"></i> <span class="nav-label">Video</span></a></li>
+                                            class="active"<?php } ?> href="<?php echo site_url('manage/information') ?>"><i class="fa fa-sticky-note-o"></i> <span class="nav-label">Informasi</span></a></li>
                                 <li><a <?php if ($this->uri->segment(2) == 'event') { ?>
-                                        class="active"<?php } ?> href="<?php echo site_url('manage/event') ?>"><i class="fa fa-calendar-o"></i> <span class="nav-label">Event</span></a></li>
-                                <li <?php if ($this->uri->segment(2) == 'template') { ?>
-                                    class="active"<?php } ?>>
+                                            class="active"<?php } ?> href="<?php echo site_url('manage/event') ?>"><i class="fa fa-calendar-o"></i> <span class="nav-label">Event</span></a></li>
+                                <li <?php if ($this->uri->segment(2) == 'media') { ?>
+                                        class="active"<?php } ?>>
+                                    <a href="<?php echo site_url('manage/seting') ?>"><i class="fa fa-camera"></i> <span class="nav-label">Media</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li><a <?php if ($this->uri->segment(3) == 'image') { ?>
+                                                    class="active"<?php } ?> href="<?php echo site_url('manage/media/image/upload') ?>">Image</a></li>
+                                        <li><a <?php if ($this->uri->segment(3) == 'video') { ?>
+                                                    class="active"<?php } ?> href="<?php echo site_url('manage/media/video') ?>">Video</a></li>
+                                    </ul>
+                                </li>
+                                <li><a <?php if ($this->uri->segment(2) == 'page') { ?>
+                                            class="active"<?php } ?> href="<?php echo site_url('manage/page') ?>"><i class="fa fa-sticky-note-o"></i> <span class="nav-label">Halaman</span></a></li>  
+                                <li <?php if ($this->uri->segment(2) == 'others') { ?>
+                                        class="active"<?php } ?>>
                                     <a href="<?php echo site_url('manage/seting') ?>"><i class="fa fa-align-justify"></i> <span class="nav-label">Lainnya</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li><a <?php if ($this->uri->segment(3) == 'brand') { ?>
-                                                class="active"<?php } ?> href="#">Partners</a></li>
+                                                    class="active"<?php } ?> href="#">Partners</a></li>
                                     </ul>
                                 </li>
 
                                 <label class="navig-group">Settings</label>
                                 <li <?php if ($this->uri->segment(2) == 'template') { ?>
-                                    class="active"<?php } ?>>
+                                        class="active"<?php } ?>>
                                     <a href="<?php echo site_url('manage/seting') ?>"><i class="fa fa-laptop"></i> <span class="nav-label">Template</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li><a <?php if ($this->uri->segment(3) == 'brand') { ?>
-                                                class="active"<?php } ?> href="#">Brand Logo</a></li>
+                                                    class="active"<?php } ?> href="<?php echo site_url('manage/template/brand') ?>">Brand</a></li>
                                         <li><a <?php if ($this->uri->segment(3) == 'banner') { ?>
-                                                class="active"<?php } ?> href="#">Banner</a></li>
-                                        <li><a <?php if ($this->uri->segment(3) == 'banner') { ?>
-                                                class="active"<?php } ?> href="<?php echo site_url('manage/information') ?>">Halaman</a></li>
+                                                    class="active"<?php } ?> href="<?php echo site_url('manage/template/banner') ?>">Banner</a></li>
+                                        <li><a <?php if ($this->uri->segment(3) == 'homepage') { ?>
+                                                    class="active"<?php } ?> href="<?php echo site_url('manage/template/homepage') ?>">Homepage</a></li>
                                     </ul>
                                 </li>
-                                <li <?php if ($this->uri->segment(2) == 'situs') { ?>
-                                    class="active"<?php } ?>>
+                                <li <?php if ($this->uri->segment(2) == 'config') { ?>
+                                        class="active"<?php } ?>>
                                     <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Situs</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li><a <?php if ($this->uri->segment(3) == 'general') { ?>
-                                                class="active"<?php } ?> href="#">General</a></li>                                             
+                                                    class="active"<?php } ?> href="<?php echo site_url('manage/config/general') ?>">General</a></li>                                             
                                     </ul>
                                 </li>
                             </ul>
@@ -118,7 +141,13 @@
                 </div>
             </nav>
             <div id="page-wrapper">
-                <?php $this->load->view($child_template) ?>
+                <?php
+                if ($this->uri->segment(1) != 'auth') {
+                    $this->load->view($child_template);
+                } else {
+                    echo $child_template;
+                }
+                ?>
                 <div class="footer" style="position: fixed; bottom: 0; background-color: #e7eaec; border-top: 1px solid #d7d6dc; width: 100%; margin-left: -25px; padding: 7.5px 30px">
                     onePage Admin Template - gomeID
                 </div>
@@ -133,8 +162,13 @@
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery.slimscroll.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/theme/metisMenu.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>assets/js/theme/admin.js"></script>
-        <script>
-            CKEDITOR.replace('ck_description_field');
-        </script>
+        <?php
+        if (!empty($assets_footer)) {
+            foreach ($assets_footer as $asset) {
+                echo $asset;
+            }
+        }
+        ?>
+
     </body><!--end of main content-->
 </html>

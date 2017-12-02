@@ -4,7 +4,7 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 require_once 'application/controllers/manage/Base.php';
 
-class Brand extends AppBase {
+class Homepage extends AppBase {
 
     function __construct() {
         parent::__construct();
@@ -12,29 +12,48 @@ class Brand extends AppBase {
     }
 
     public function index() {
-        $data['brand'] = $this->base_model->get_join_item('row', 'images.id, value, autoload, images.name, dir, title, description', NULL, 'settings', 'images', 'settings.value = images.id', 'inner');
-        
-        $this->form_validation->set_rules('title', 'Nama Logo', 'trim|required');
+        $data['homepage_background_template'] = $this->build_opt['homepage_background_template'];
+        $data['homepage_editable_content'] = $this->build_opt['homepage_editable_content'];
+        $data['homepage_content_title'] = $this->build_opt['homepage_content_title'];
+        $data['theme'] = $this->base_model->get_join_item('result', 'images.id, define, value, images.name, dir', NULL, 'theme_settings', 'images', 'theme_settings.value = images.id', 'inner');
+
+        $data['theme_contents'] = $this->base_model->get_item('result', 'theme_settings', 'define, value', array('define like' => '%homepage_editable_content%'), 'define ASC');
+        $data['theme_contents_title'] = $this->base_model->get_item('result', 'theme_settings', 'define, value', array('define like' => '%homepage_content_title%', 'define ASC'));
+        $i = 1;
+        foreach ($data['theme_contents'] as $v) {
+            $this->form_validation->set_rules($v['define'], 'Konten_' . $i, 'trim');
+            $i++;
+        }
+        foreach ($data['theme_contents_title'] as $v) {
+            $this->form_validation->set_rules($v['define'], 'Judul konten_' . $i, 'trim');
+            $i++;
+        }
 
         if ($this->form_validation->run() === FALSE) {
-            $this->admindisplay('manage/template/brand/index', $data);
+            $this->admindisplay('manage/template/homepage/index', $data);
         } else {
-            $params = array(
-                'title' => $this->input->post('title', TRUE),
-                'description' => $this->input->post('description', TRUE),
-                'modified' => date("Y-m-d H:i:s"),
-            );
-            $act = $this->base_model->update_item('images', $params, array('id' => $data['brand']['id']));
+            for ($i = 0; $i < $data['homepage_editable_content']; $i++) {
+                $params = array(
+                    'value' => $this->input->post('homepage_editable_content_' . $i, TRUE),
+                );
+                $act = $this->base_model->update_item('theme_settings', $params, array('define' => 'homepage_editable_content_' . $i));
+            }
+            for ($i = 0; $i < $data['homepage_content_title']; $i++) {
+                $params = array(
+                    'value' => $this->input->post('homepage_content_title_' . $i, TRUE),
+                );
+                $act = $this->base_model->update_item('theme_settings', $params, array('define' => 'homepage_content_title_' . $i));
+            }
             if (!$act) {
                 $this->_result_msg('danger', 'Gagal menyimpan data');
             } else {
                 $this->_result_msg('success', 'Data berhasil diubah');
             }
-            redirect('manage/template/brand/index');
+            redirect('manage/template/homepage/index');
         }
     }
 
-    public function load() {
+    public function load($param = NULL) {
 
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             $options = [
@@ -42,26 +61,30 @@ class Brand extends AppBase {
                 'upload_dir' => APPPATH . '../media/image/',
                 'upload_url' => base_url('media/image/'),
                 'accept_file_types' => '/\.(gif|jpe?g|png)$/i',
-                'temp_save' => 'brand',
+                'temp_save' => $param,
                 'dir' => 'media/image/'
             ];
             //$this->load->library("uploadhandler", $options);
             $this->load->library("custom_uploadhandler", $options);
-            $action = $this->base_model->get_item('result', 'images', 'id, temp', array('temp' => 'brand'));
+            $action = $this->base_model->get_item('result', 'images', 'id, temp', array('temp' => $param));
             if ($action) {
                 foreach ($action as $item) {
-                    if ($item['temp'] == 'brand') {
-                        $this->base_model->update_item('settings', array('value' => $item['id']), array('name' => 'site_logo'));
+                    if ($item['temp'] == $param) {
+                        $this->base_model->update_item('theme_settings', array('value' => $item['id']), array('define' => $param));
                         $this->base_model->update_item('images', array('temp' => NULL), array('id' => $item['id']));
                     }
                 }
             }
         } else {
-            redirect('manage/template/brand');
+            redirect('manage/template/homepage');
         }
     }
 
     public function upload() {
+        if (!$this->input->post('param', TRUE)) {
+            redirect('manage/template/homepage');
+        }
+        $data['param'] = $this->input->post('param', TRUE);
         $data['assets_header'] = array(
             'asset_2' => '<link href="' . base_url() . 'assets/blueimp/css/jquery.fileupload.css" rel="stylesheet">',
             'asset_3' => '<link href="' . base_url() . 'assets/blueimp/css/jquery.fileupload-ui.css" rel="stylesheet">',
@@ -79,6 +102,7 @@ class Brand extends AppBase {
             'asset_10' => '<script src="' . base_url() . 'assets/blueimp/js/jquery.fileupload-ui.js"></script>',
             'asset_11' => '<script src="' . base_url() . 'assets/blueimp/js/main.js"></script>',
         );
-        $this->admindisplay('manage/template/brand/upload', $data);
+        $this->admindisplay('manage/template/homepage/upload', $data);
     }
+
 }
