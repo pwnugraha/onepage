@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Base_model extends CI_Model {
 
-    public function get_item($search_type, $table, $select = NULL, $where = array(), $order = NULL, $limit = NULL, $offset = NULL) {
+    public function get_item($search_type, $table, $select = NULL, $where = NULL, $order = NULL, $limit = NULL, $offset = NULL) {
         if (isset($select)) {
             $this->db->select($select);
         }
@@ -50,8 +50,11 @@ class Base_model extends CI_Model {
         }
     }
 
-    function insert_item($table, $data) {
+    function insert_item($table, $data, $return = NULL) {
         $query = $this->db->insert($table, $data);
+        if($return == 'id' && $query){
+            return $this->db->insert_id();
+        }
         return $query;
     }
 

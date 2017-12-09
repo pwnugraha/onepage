@@ -11,7 +11,7 @@ class Banner extends AppBase {
     }
 
     public function index() {
-        $data['banner'] = $this->base_model->get_join_item('result', 'id_image, sort, section, page, autoload, name, dir', 'id_image ASC', 'banners', 'images', 'banners.id_image = images.id', 'inner');
+        $data['banner'] = $this->base_model->get_join_item('result', 'banners.id, media_id, sort, section, page, autoload, name, dir', 'banners.id ASC', 'banners', 'media', 'banners.media_id = media.id', 'inner');
         $this->admindisplay('manage/template/banner/index', $data);
     }
 
@@ -23,17 +23,20 @@ class Banner extends AppBase {
                 'upload_dir' => APPPATH . '../media/image/',
                 'upload_url' => base_url('media/image/'),
                 'accept_file_types' => '/\.(gif|jpe?g|png)$/i',
+                'max_file_size' => 2000000,
                 'temp_save' => 'banner',
-                'dir' => 'media/image/'
+                'dir' => 'media/image/',
+                'media_type' => 'image',
+                'user' => $this->ion_auth->user()->row()->id
             ];
             //$this->load->library("uploadhandler", $options);
             $this->load->library("custom_uploadhandler", $options);
-            $action = $this->base_model->get_item('result', 'images', 'id, temp', array('temp' => 'banner'));
+            $action = $this->base_model->get_item('result', 'media', 'id, temp', array('temp' => 'banner'));
             if ($action) {
                 foreach ($action as $item) {
                     if ($item['temp'] == 'banner') {
-                        $this->base_model->insert_item('banners', array('id_image' => $item['id']));
-                        $this->base_model->update_item('images', array('temp' => NULL), array('id' => $item['id']));
+                        $this->base_model->insert_item('banners', array('media_id' => $item['id']));
+                        $this->base_model->update_item('media', array('temp' => NULL), array('id' => $item['id']));
                     }
                 }
             }
@@ -71,14 +74,14 @@ class Banner extends AppBase {
         $data['assets_footer'] = array(
             'asset_1' => '<script>$(function () {$(document).on("change", "#page", function () {if ($(this).val() == "") {$("#section").html("");}var page = {' . $html . '};for (var prop in page) {if (page.hasOwnProperty(prop)) {if ($(this).val() == prop) {var html = "";for (i = 1; i <= page[prop]; i++) {html += \'<option value = "\' + i + \'">Section \' + i + \'</option>\';$("#section").html(html);}break;}};}})})</script>'
         );
-        if (!$this->base_model->get_item('row', 'banners', 'id', array('id_image' => $id))) {
+        if (!$this->base_model->get_item('row', 'banners', 'id', array('id' => $id))) {
             show_404();
         } else {
             $data['id_banner'] = $id;
         }
         $data['banner_page'] = $this->build_opt['banner_page'];
         $data['max_banner'] = $this->build_opt['max_banner'];
-        $data['banner'] = $this->base_model->get_join_item('row', 'id_image, sort, section, page, autoload, name, dir', 'section ASC, sort ASC', 'banners', 'images', 'banners.id_image = images.id', 'inner', array('id_image' => $id));
+        $data['banner'] = $this->base_model->get_join_item('row', 'banners.id, media_id, sort, section, page, autoload, name, dir', 'section ASC, sort ASC', 'banners', 'media', 'banners.media_id = media.id', 'inner', array('banners.id' => $id));
 
         $this->form_validation->set_rules('page', 'Halaman', 'trim|required');
         $this->form_validation->set_rules('section', 'Bagian', 'trim|required');
@@ -94,31 +97,38 @@ class Banner extends AppBase {
                 'sort' => $this->input->post('sort', TRUE),
                 'autoload' => $this->input->post('autoload', TRUE),
             );
-            $act = $this->base_model->update_item('banners', $params, array('id_image' => $id));
+            $act = $this->base_model->update_item('banners', $params, array('id' => $id));
             if (!$act) {
                 $this->_result_msg('danger', 'Gagal menyimpan data');
             } else {
                 $this->_result_msg('success', 'Data berhasil diubah');
-                //$data['page'] = $this->page->get_view_info($id);
             }
             redirect('manage/template/banner/edit/' . $id);
         }
     }
 
     public function delete($id) {
-        $result = $this->base_model->delete_item('banners', array('id_image' => $id));
-        if ($result) {
-            $this->_result_msg('success', 'Data telah dihapus');
-        } else {
+        if (!$this->base_model->get_item('row', 'banners', 'id', array('id' => $id))) {
             $this->_result_msg('danger', 'Gagal menghapus data');
+        } else {
+            $result = $this->base_model->delete_item('banners', array('id' => $id));
+            if ($result) {
+                $this->_result_msg('success', 'Data telah dihapus');
+            } else {
+                $this->_result_msg('danger', 'Gagal menghapus data');
+            }
         }
         redirect('manage/template/banner');
     }
 
-    public function sort_check($sort) {
-        $autoload  = $this->input->post('autoload');
+    public function sort_check() {
+        if (!$this->input->post('sort')) {
+            show_404();
+        }
+        $sort = $this->input->post('sort');
+        $autoload = $this->input->post('autoload');
         if ($autoload == 'yes') {
-            if (!$this->base_model->get_item('row', 'banners', 'sort', array('sort' => $sort, 'section' => $this->input->post('section'), 'autoload' => $autoload))) {
+            if (!$this->base_model->get_item('row', 'banners', 'sort', array('sort' => $sort, 'section' => $this->input->post('section'), 'autoload' => $autoload, 'id NOT IN ('.$this->input->post('id').')' => NULL))) {
                 return TRUE;
             } else {
                 $this->form_validation->set_message('sort_check', 'Urutan banner yang ditampilkan tidak boleh sama.');

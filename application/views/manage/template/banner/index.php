@@ -21,7 +21,7 @@
             <div class="row">
                 <div class = "col-xs-12 col-sm-12">
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover table-responsive" id="dtable">
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
@@ -47,8 +47,8 @@
                                         <td class="text-center"><?php echo $i['section'] ?></td>
                                         <td class="text-center"><?php echo $i['sort'] ?></td>
                                         <td class="text-center">
-                                            <a href="<?php echo site_url('manage/template/banner/edit/' . $i['id_image']) ?>" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-edit text-primary"></i></a>
-                                            <button id="delete" type="button" class="btn btn-default btn-sm" data-url="<?php echo site_url('manage/template/banner/delete/' . $i['id_image']) ?>" data-toggle="modal" data-target="#delete-modal" data-backdrop="static" data-keyboard="false" title="Hapus"><i class="fa fa-close text-danger"></i></button>
+                                            <a href="<?php echo site_url('manage/template/banner/edit/' . $i['id']) ?>" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-edit text-primary"></i></a>
+                                            <button id="delete" type="button" class="btn btn-default btn-sm" data-url="<?php echo site_url('manage/template/banner/delete/' . $i['id']) ?>" data-toggle="modal" data-target="#delete-modal" data-backdrop="static" data-keyboard="false" title="Hapus"><i class="fa fa-close text-danger"></i></button>
                                         </td>
                                     </tr>
                                     <?php
@@ -56,7 +56,7 @@
                                 }
                                 ?>
                             </tbody>
-                        </table>
+                        </table><br>
                     </div>
                 </div>
             <?php }

@@ -15,7 +15,7 @@ class Homepage extends AppBase {
         $data['homepage_background_template'] = $this->build_opt['homepage_background_template'];
         $data['homepage_editable_content'] = $this->build_opt['homepage_editable_content'];
         $data['homepage_content_title'] = $this->build_opt['homepage_content_title'];
-        $data['theme'] = $this->base_model->get_join_item('result', 'images.id, define, value, images.name, dir', NULL, 'theme_settings', 'images', 'theme_settings.value = images.id', 'inner');
+        $data['theme'] = $this->base_model->get_join_item('result', 'media.id, define, value, media.name, dir', NULL, 'theme_settings', 'media', 'theme_settings.value = media.id', 'inner');
 
         $data['theme_contents'] = $this->base_model->get_item('result', 'theme_settings', 'define, value', array('define like' => '%homepage_editable_content%'), 'define ASC');
         $data['theme_contents_title'] = $this->base_model->get_item('result', 'theme_settings', 'define, value', array('define like' => '%homepage_content_title%', 'define ASC'));
@@ -61,17 +61,20 @@ class Homepage extends AppBase {
                 'upload_dir' => APPPATH . '../media/image/',
                 'upload_url' => base_url('media/image/'),
                 'accept_file_types' => '/\.(gif|jpe?g|png)$/i',
+                'max_file_size' => 2000000,
                 'temp_save' => $param,
-                'dir' => 'media/image/'
+                'dir' => 'media/image/',
+                'media_type' => 'image',
+                'user' => $this->ion_auth->user()->row()->id
             ];
             //$this->load->library("uploadhandler", $options);
             $this->load->library("custom_uploadhandler", $options);
-            $action = $this->base_model->get_item('result', 'images', 'id, temp', array('temp' => $param));
+            $action = $this->base_model->get_item('result', 'media', 'id, temp', array('temp' => $param));
             if ($action) {
                 foreach ($action as $item) {
                     if ($item['temp'] == $param) {
                         $this->base_model->update_item('theme_settings', array('value' => $item['id']), array('define' => $param));
-                        $this->base_model->update_item('images', array('temp' => NULL), array('id' => $item['id']));
+                        $this->base_model->update_item('media', array('temp' => NULL), array('id' => $item['id']));
                     }
                 }
             }
@@ -86,8 +89,8 @@ class Homepage extends AppBase {
         }
         $data['param'] = $this->input->post('param', TRUE);
         $data['assets_header'] = array(
-            'asset_2' => '<link href="' . base_url() . 'assets/blueimp/css/jquery.fileupload.css" rel="stylesheet">',
-            'asset_3' => '<link href="' . base_url() . 'assets/blueimp/css/jquery.fileupload-ui.css" rel="stylesheet">',
+            'asset_1' => '<link href="' . base_url() . 'assets/blueimp/css/jquery.fileupload.css" rel="stylesheet">',
+            'asset_2' => '<link href="' . base_url() . 'assets/blueimp/css/jquery.fileupload-ui.css" rel="stylesheet">',
         );
         $data['assets_footer'] = array(
             'asset_1' => '<script src="' . base_url() . 'assets/blueimp/js/vendor/jquery.ui.widget.js"></script>',

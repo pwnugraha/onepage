@@ -45,7 +45,6 @@ class General extends AppBase {
             $this->form_validation->set_rules('facebook', 'Facebook', 'trim');
             $this->form_validation->set_rules('twitter', 'Twitter', 'trim');
             $this->form_validation->set_rules('instagram', 'Instagram', 'trim');
-            $this->form_validation->set_rules('about_gome', 'Tentang Gome', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $this->admindisplay('manage/config/setting_general', $data);
@@ -61,8 +60,7 @@ class General extends AppBase {
                     'whatsapp' => $this->input->post('whatsapp', TRUE),
                     'facebook' => $this->input->post('facebook', TRUE),
                     'twitter' => $this->input->post('twitter', TRUE),
-                    'instagram' => $this->input->post('instagram', TRUE),
-                    'about_gome' => $this->input->post('about_gome', TRUE)
+                    'instagram' => $this->input->post('instagram', TRUE)
                 );
                 $upd = $this->config_model->upd_generalconfig($params);
                 $this->_result_msg('success', 'Pengaturan berhasil diubah');

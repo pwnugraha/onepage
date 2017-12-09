@@ -12,7 +12,7 @@ class Brand extends AppBase {
     }
 
     public function index() {
-        $data['brand'] = $this->base_model->get_join_item('row', 'images.id, value, autoload, images.name, dir, title, description', NULL, 'settings', 'images', 'settings.value = images.id', 'inner');
+        $data['brand'] = $this->base_model->get_join_item('row', 'media.id, value, autoload, media.name, dir, title, description', NULL, 'settings', 'media', 'settings.value = media.id', 'inner');
         
         $this->form_validation->set_rules('title', 'Nama Logo', 'trim|required');
 
@@ -24,7 +24,7 @@ class Brand extends AppBase {
                 'description' => $this->input->post('description', TRUE),
                 'modified' => date("Y-m-d H:i:s"),
             );
-            $act = $this->base_model->update_item('images', $params, array('id' => $data['brand']['id']));
+            $act = $this->base_model->update_item('media', $params, array('id' => $data['brand']['id']));
             if (!$act) {
                 $this->_result_msg('danger', 'Gagal menyimpan data');
             } else {
@@ -42,17 +42,20 @@ class Brand extends AppBase {
                 'upload_dir' => APPPATH . '../media/image/',
                 'upload_url' => base_url('media/image/'),
                 'accept_file_types' => '/\.(gif|jpe?g|png)$/i',
+                'max_file_size' => 2000000,
                 'temp_save' => 'brand',
-                'dir' => 'media/image/'
+                'dir' => 'media/image/',
+                'media_type' => 'image',
+                'user' => $this->ion_auth->user()->row()->id
             ];
             //$this->load->library("uploadhandler", $options);
             $this->load->library("custom_uploadhandler", $options);
-            $action = $this->base_model->get_item('result', 'images', 'id, temp', array('temp' => 'brand'));
+            $action = $this->base_model->get_item('result', 'media', 'id, temp', array('temp' => 'brand'));
             if ($action) {
                 foreach ($action as $item) {
                     if ($item['temp'] == 'brand') {
                         $this->base_model->update_item('settings', array('value' => $item['id']), array('name' => 'site_logo'));
-                        $this->base_model->update_item('images', array('temp' => NULL), array('id' => $item['id']));
+                        $this->base_model->update_item('media', array('temp' => NULL), array('id' => $item['id']));
                     }
                 }
             }
@@ -63,8 +66,8 @@ class Brand extends AppBase {
 
     public function upload() {
         $data['assets_header'] = array(
-            'asset_2' => '<link href="' . base_url() . 'assets/blueimp/css/jquery.fileupload.css" rel="stylesheet">',
-            'asset_3' => '<link href="' . base_url() . 'assets/blueimp/css/jquery.fileupload-ui.css" rel="stylesheet">',
+            'asset_1' => '<link href="' . base_url() . 'assets/blueimp/css/jquery.fileupload.css" rel="stylesheet">',
+            'asset_2' => '<link href="' . base_url() . 'assets/blueimp/css/jquery.fileupload-ui.css" rel="stylesheet">',
         );
         $data['assets_footer'] = array(
             'asset_1' => '<script src="' . base_url() . 'assets/blueimp/js/vendor/jquery.ui.widget.js"></script>',

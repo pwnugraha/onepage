@@ -109,6 +109,7 @@
                         <?php endfor; ?>
                     </select>
                 </div>
+                <input type="hidden" name="id" value="<?php echo $banner['id']?>">
                 <div class="form-group">
                     <div class="">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>Simpan</button>&nbsp;&nbsp;&nbsp;

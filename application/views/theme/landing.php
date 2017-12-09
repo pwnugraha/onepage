@@ -1,205 +1,174 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-    <head>
-        <title>Laundry-in</title>
-
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">    
-
-        <!-- Bootstrap core CSS -->
-        <link href="<?php echo base_url() ?>assets/bootstrap4/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom fonts for this template -->
-        <link href="<?php echo base_url() ?>assets/css/font-awesome.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-        <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
-
-        <!-- Custom styles for this template -->
-        <link href="<?php echo base_url() ?>assets/laundry-in/css/style.min.css" rel="stylesheet">
-    </head>
-
-    <body id="page-top">
-
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" style="background-color: #059087">
-            <div class="container">
-                <a class="navbar-brand js-scroll-trigger" href="#page-top">Laundry-in</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fa fa-bars"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#article">Article</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#download">Download</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-                        </li>
-                    </ul>
+<!--section section-->
+<section class="header8 cid-qBvvGyyO8t mbr-fullscreen mbr-parallax-background" id="header8-i" data-rv-view="1094" style="background-image: <?php echo 'url(' . base_url() . $theme[0]['dir'] . $theme[0]['name'] . ')'; ?>">
+    <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(0, 0, 0);"></div>
+    <div class="container align-center">
+        <div class="row justify-content-md-center">
+            <div class="mbr-white col-md-10">
+                <h1 class="mbr-section-title align-center py-2 mbr-bold mbr-fonts-style display-1">
+                    <?php echo $theme_contents_title[0]['value'] ?>
+                </h1>
+                <p class="mbr-text align-center py-2 mbr-fonts-style display-5">
+                    <?php echo $theme_contents[0]['value'] ?>
+                </p>
+                <div class="mbr-media show-modal align-center py-2">
+                    <span class="mbri-play mbr-iconfont" media-simple="true" data-modal=".modalWindow"></span>
+                </div>
+                <div class="icon-description align-center font-italic pb-3 mbr-fonts-style display-7">
+                    Watch Video</div>
+                <div class="mbr-section-btn text-center">
+                    <a class="btn btn-img btn-white-outline display-4" href="#" target="_blank">
+                        <img src="<?php echo base_url('assets/laundry-in/') ?>assets/images/button-app-store.png" alt="App Store" width="175" height="60">
+                    </a> 
+                    <a class="btn btn-img btn-white-outline display-4" href="#" target="_blank">
+                        <img src="<?php echo base_url('assets/laundry-in/') ?>assets/images/button-google-play.png" alt="Google Play" width="175" height="60">
+                    </a>
                 </div>
             </div>
-        </nav>
-
-        <!-- Intro Header -->
-        <header class="masthead" style="background-image: <?php echo 'url(' . base_url() . $theme[0]['dir'] . $theme[0]['name'] . ')'; ?>">
-            <div class="intro-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 mx-auto">
-                            <h1 class="brand-heading"><?php echo $theme_contents_title[0]['value'] ?></h1>
-                            <p class="intro-text"><?php echo $theme_contents[0]['value'] ?></p>
-                            <a href="#about" class="btn btn-circle js-scroll-trigger">
-                                <i class="fa fa-angle-double-down animated"></i>
-                            </a>
-                            <div class="text-center">
-                                <a class="button-img" href="https://itunes.apple.com/pl/genre/ios/id36?mt=8" target="_blank">
-                                    <img src="<?php echo base_url() ?>assets/laundry-in/img/icon-btn/button-app-store.png" alt="App Store" width="175" height="60" />
-                                </a> 
-                                <a class="button-img" href="https://play.google.com/store/apps" target="_blank">
-                                    <img src="<?php echo base_url() ?>assets/laundry-in/img/icon-btn/button-google-play.png" alt="Google Play" width="175" height="60" />
-                                </a>
-                            </div>
-                        </div>
+        </div>
+    </div>
+    <div>
+        <div class="modalWindow" style="display: none;">
+            <div class="modalWindow-container">
+                <div class="modalWindow-video-container">
+                    <div class="modalWindow-video">
+                        <iframe width="100%" height="100%" frameborder="0" allowfullscreen="1" data-src="https://www.youtube.com/watch?v=8T2oSbFiBY8"></iframe>
                     </div>
+                    <a class="close" role="button"  data-dismiss="modal">
+                        <span aria-hidden="true" class="mbri-close mbr-iconfont closeModal"></span>
+                        <span class="sr-only">Close</span>
+                    </a>
                 </div>
             </div>
-        </header>
+        </div>
+    </div>
+</section>
 
-        <!-- About Section -->
-        <section id="about" class="content-section text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <h2><?php echo $theme_contents_title[1]['value'] ?></h2>
-                        <p><?php echo $theme_contents[1]['value'] ?></p>
-
-                        <!-- Craousel -->
-                        <div id="carouselControlsAbout" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner" role="listbox">
-                                <?php foreach ($banner_section_1 as $k => $v) { ?>
-                                    <div class="carousel-item <?php echo $k == 0 ? "active" : ""; ?>">
-                                        <img class="d-block img-fluid" src="<?php echo base_url().$v['dir'].$v['name'] ?>" alt="slide">
+<!-- carousel 1-->
+<section class="carousel slide cid-qCwJr9lnOZ" data-interval="false" id="slider2-12" data-rv-view="1097">
+    <div class="container content-slider">
+        <div class="content-slider-wrap">
+            <div>
+                <div class="mbr-slider slide carousel" data-pause="true" data-keyboard="false" data-ride="carousel" data-interval="4000">
+                    <div class="carousel-inner" role="listbox">
+                        <?php foreach ($banner_section_1 as $k => $v) { ?>
+                            <div class="carousel-item slider-fullscreen-image <?php echo $k == 0 ? "active" : ""; ?>" data-bg-video-slide="false" >
+                                <div class="container container-slide">
+                                    <div class="image_wrapper">
+                                        <img class="d-block img-fluid" src="<?php echo base_url() . $v['dir'] . $v['name'] ?>" alt="slide">
+                                        <div class="carousel-caption justify-content-center">
+                                            <div class="col-10 align-center"></div>
+                                        </div>
                                     </div>
-                                <?php } ?>
+                                </div>
                             </div>
-                            <a class="carousel-control-prev" href="#carouselControlsAbout" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselControlsAbout" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
+                        <?php } ?>
                     </div>
+                    <a data-app-prevent-settings="" class="carousel-control carousel-control-prev" role="button" data-slide="prev" href="#slider2-12">
+                        <span aria-hidden="true" class="mbri-left mbr-iconfont"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a data-app-prevent-settings="" class="carousel-control carousel-control-next" role="button" data-slide="next" href="#slider2-12">
+                        <span aria-hidden="true" class="mbri-right mbr-iconfont"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-            </div>
-        </section>
+            </div> 
+        </div>
+    </div>
+</section>
 
-        <!-- Article Section -->
-        <section id="article" class="content-section text-center" style="background-color: #58cbc4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <h2><?php echo $theme_contents_title[2]['value'] ?></h2>
-                        <p><?php echo $theme_contents[2]['value'] ?></p>
-
-                        <!-- Craousel -->
-                        <div id="carouselControls" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner" role="listbox">
-                               <?php foreach ($banner_section_2 as $k => $v) { ?>
-                                    <div class="carousel-item <?php echo $k == 0 ? "active" : ""; ?>">
-                                        <img class="d-block img-fluid" src="<?php echo base_url().$v['dir'].$v['name'] ?>" alt="slide">
+<!-- carousel 2-->
+<section class="carousel slide cid-qCx6EeDfhl" data-interval="false" id="slider2-15" data-rv-view="1109">
+    <div class="container content-slider">
+        <div class="content-slider-wrap">
+            <div>
+                <div class="mbr-slider slide carousel" data-pause="true" data-keyboard="false" data-ride="carousel" data-interval="4000">
+                    <div class="carousel-inner" role="listbox">
+                        <?php foreach ($banner_section_2 as $k => $v) { ?>
+                            <div class="carousel-item slider-fullscreen-image <?php echo $k == 0 ? "active" : ""; ?>" data-bg-video-slide="false" >
+                                <div class="container container-slide">
+                                    <div class="image_wrapper">
+                                        <img class="d-block img-fluid" src="<?php echo base_url() . $v['dir'] . $v['name'] ?>" alt="slide">
+                                        <div class="carousel-caption justify-content-center">
+                                            <div class="col-10 align-center"></div>
+                                        </div>
                                     </div>
-                                <?php } ?>
+                                </div>
                             </div>
-                            <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
+                        <?php } ?>
                     </div>
+                    <a data-app-prevent-settings="" class="carousel-control carousel-control-prev" role="button" data-slide="prev" href="#slider2-15">
+                        <span aria-hidden="true" class="mbri-left mbr-iconfont"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a data-app-prevent-settings="" class="carousel-control carousel-control-next" role="button" data-slide="next" href="#slider2-15">
+                        <span aria-hidden="true" class="mbri-right mbr-iconfont"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div> 
+        </div>
+    </div>
+</section>
+
+<!-- -->
+<section class="mbr-section content5 cid-qCx2LPmB9O mbr-parallax-background" id="content5-14" data-rv-view="1121" style="background-image: <?php echo 'url(' . base_url() . $theme[1]['dir'] . $theme[1]['name'] . ')'; ?>">
+    <div class="mbr-overlay" style="opacity: 0.4; background-color: rgb(0, 0, 0);">
+    </div>
+    <div class="container">
+        <div class="media-container-row">
+            <div class="title col-12 col-md-8">
+                <h2 class="align-center mbr-bold mbr-white pb-3 mbr-fonts-style display-2"><?php echo $theme_contents_title[1]['value'] ?></h2>
+                <h3 class="mbr-section-subtitle align-center mbr-light mbr-white pb-3 mbr-fonts-style display-5"><?php echo $theme_contents[1]['value'] ?></h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- -->
+<section class="mbr-section info3 cid-qCwLKeHaak mbr-parallax-background" id="info3-13" data-rv-view="1124" style="background-image: <?php echo 'url(' . base_url() . $theme[2]['dir'] . $theme[2]['name'] . ')'; ?>">
+    <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(0, 0, 0);">
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="media-container-column title col-12 col-md-10">
+                <h2 class="align-left mbr-bold mbr-white pb-3 mbr-fonts-style display-2"><?php echo $theme_contents_title[2]['value'] ?></h2>
+                <h3 class="mbr-section-subtitle align-left mbr-light mbr-white pb-3 mbr-fonts-style display-5">S<?php echo $theme_contents[2]['value'] ?></h3>
+                <div class="mbr-section-btn align-left py-4">
+                    <a class="btn btn-img btn-white-outline display-4" href="#" target="_blank">
+                        <img src="<?php echo base_url('assets/laundry-in/') ?>assets/images/button-app-store.png" alt="App Store" width="175" height="60">
+                    </a> 
+                    <a class="btn btn-img btn-white-outline display-4" href="#" target="_blank">
+                        <img src="<?php echo base_url('assets/laundry-in/') ?>assets/images/button-google-play.png" alt="Google Play" width="175" height="60">
+                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
-        <!-- Download Section -->
-        <section id="download" class="download-section content-section text-center" style="background-image: <?php echo 'url(' . base_url() . $theme[1]['dir'] . $theme[1]['name'] . ')'; ?>">
-            <div class="container">
-                <div class="col-lg-8 mx-auto">
-                    <h2>Download Aplikasi Laundry-in</h2>
-                    <p>You can download Laundry-in for free on the preview page at Start Bootstrap.</p>
-                    <a href="#" class="btn btn-default btn-lg">Visit Download Page</a>
+<!-- -->
+<section class="cid-qCCowtSh0L" id="social-buttons3-1j" data-rv-view="1127">
+    <div class="container">
+        <div class="media-container-row">
+            <div class="col-md-8 align-center">
+                <h2 class="pb-3 mbr-section-title mbr-fonts-style display-2">THIS PAGE!</h2>
+                <div>
+
+
                 </div>
             </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section content-section text-center" style="background-image: <?php echo 'url(' . base_url() . $theme[2]['dir'] . $theme[2]['name'] . ')'; ?>">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <h2>Contact Laundry-in</h2>
-                        <p>Feel free to leave us a comment on the
-                            <a href="#">Laundry-in template overview page</a>
-                            on Start Bootstrap to give some feedback about this theme!</p>
-                        <ul class="list-inline banner-social-buttons">
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-default btn-lg">
-                                    <i class="fa fa-twitter fa-fw"></i>
-                                    <span class="network-name">Twitter</span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-default btn-lg">
-                                    <i class="fa fa-github fa-fw"></i>
-                                    <span class="network-name">Github</span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#" class="btn btn-default btn-lg">
-                                    <i class="fa fa-google-plus fa-fw"></i>
-                                    <span class="network-name">Google+</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <div class="container text-center">
-                <p>Copyright &copy; Laundry-in 2017</p>
-            </div>
-        </footer>
-
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/laundry-in/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/bootstrap4/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Plugin JavaScript -->
-        <script src="<?php echo base_url() ?>assets/laundry-in/jquery-easing/jquery.easing.min.js"></script>
-
-        <!-- Custom scripts for this template -->
-        <script src="<?php echo base_url() ?>assets/laundry-in/js/style.min.js"></script>
-
-    </body>
-
-</html>
+        </div>
+    </div>
+</section>
+<footer class="nav-bullet-container">
+    <ul class="nav-bullet horizontal-S">
+        <li class="active"><a href="#page-top"></a></li>
+        <li><a href="#slider2-12"></a></li>
+        <li><a href="#slider2-15"></a></li>
+        <li><a href="#content5-14"></a></li>
+        <li><a href="#info3-13"></a></li>
+        <li><a href="#social-buttons3-1j"></a></li>
+        <li><a href="#footer4-1l"></a></li>
+    </ul>
+</footer>

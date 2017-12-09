@@ -12,11 +12,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="icon" href="">
         <title>Onepage | Admin</title>
 
-        <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet"> 
-        <link href="<?php echo base_url() ?>assets/css/font-awesome.min.css" rel="stylesheet">
-        <link href="<?php echo base_url() ?>assets/css/theme/admin.css" rel="stylesheet">
-        <link href="<?php echo base_url() ?>assets/css/theme/metisMenu.css" rel="stylesheet"> 
-        <link href="<?php echo base_url() ?>assets/css/theme/style.css" rel="stylesheet">
+        <link href="<?php echo base_url() ?>assets/onepage/css/bootstrap.min.css" rel="stylesheet"> 
+        <link href="<?php echo base_url() ?>assets/onepage/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<?php echo base_url() ?>assets/onepage/css/theme/admin.css" rel="stylesheet">
+        <link href="<?php echo base_url() ?>assets/onepage/css/theme/metisMenu.css" rel="stylesheet"> 
+        <link href="<?php echo base_url() ?>assets/onepage/css/theme/style.css" rel="stylesheet">
+        <link href="<?php echo base_url() ?>assets/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet">
         <?php
         if (!empty($assets_header)) {
             foreach ($assets_header as $asset) {
@@ -89,22 +90,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         href="<?php echo site_url('manage/dashboard') ?>"><i class="fa fa-desktop"></i> <span class="nav-label">Dashboard</span></a>
                                 </li>
                                 <label class="navig-group">Contents</label>
-                                <li><a <?php if ($this->uri->segment(2) == 'information') { ?>
-                                            class="active"<?php } ?> href="<?php echo site_url('manage/information') ?>"><i class="fa fa-sticky-note-o"></i> <span class="nav-label">Informasi</span></a></li>
-                                <li><a <?php if ($this->uri->segment(2) == 'event') { ?>
-                                            class="active"<?php } ?> href="<?php echo site_url('manage/event') ?>"><i class="fa fa-calendar-o"></i> <span class="nav-label">Event</span></a></li>
+                                <li <?php if ($this->uri->segment(2) == 'information') { ?>
+                                        class="active"<?php } ?>>
+                                    <a href="<?php echo site_url('manage/information#') ?>"><i class="fa fa-sticky-note-o"></i> <span class="nav-label">Informasi</span><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li><a <?php if ($this->uri->segment(3) == 'article') { ?>
+                                                    class="active"<?php } ?> href="<?php echo site_url('manage/information/article') ?>">Artikel</a></li>
+                                        <li><a <?php if ($this->uri->segment(3) == 'event') { ?>
+                                                    class="active"<?php } ?> href="<?php echo site_url('manage/information/event') ?>">Event</a></li>
+                                    </ul>
+                                </li>
                                 <li <?php if ($this->uri->segment(2) == 'media') { ?>
                                         class="active"<?php } ?>>
-                                    <a href="<?php echo site_url('manage/seting') ?>"><i class="fa fa-camera"></i> <span class="nav-label">Media</span><span class="fa arrow"></span></a>
+                                    <a href="<?php echo site_url('manage/media#') ?>"><i class="fa fa-camera"></i> <span class="nav-label">Media</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li><a <?php if ($this->uri->segment(3) == 'image') { ?>
-                                                    class="active"<?php } ?> href="<?php echo site_url('manage/media/image/upload') ?>">Image</a></li>
+                                                    class="active"<?php } ?> href="<?php echo site_url('manage/media/image') ?>">Image</a></li>
                                         <li><a <?php if ($this->uri->segment(3) == 'video') { ?>
                                                     class="active"<?php } ?> href="<?php echo site_url('manage/media/video') ?>">Video</a></li>
                                     </ul>
                                 </li>
                                 <li><a <?php if ($this->uri->segment(2) == 'page') { ?>
-                                            class="active"<?php } ?> href="<?php echo site_url('manage/page') ?>"><i class="fa fa-sticky-note-o"></i> <span class="nav-label">Halaman</span></a></li>  
+                                            class="active"<?php } ?> href="<?php echo site_url('manage/page') ?>"><i class="fa fa-paperclip"></i> <span class="nav-label">Halaman</span></a></li>  
                                 <li <?php if ($this->uri->segment(2) == 'others') { ?>
                                         class="active"<?php } ?>>
                                     <a href="<?php echo site_url('manage/seting') ?>"><i class="fa fa-align-justify"></i> <span class="nav-label">Lainnya</span><span class="fa arrow"></span></a>
@@ -117,7 +124,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <label class="navig-group">Settings</label>
                                 <li <?php if ($this->uri->segment(2) == 'template') { ?>
                                         class="active"<?php } ?>>
-                                    <a href="<?php echo site_url('manage/seting') ?>"><i class="fa fa-laptop"></i> <span class="nav-label">Template</span><span class="fa arrow"></span></a>
+                                    <a href="<?php echo site_url('manage/template#') ?>"><i class="fa fa-laptop"></i> <span class="nav-label">Template</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li><a <?php if ($this->uri->segment(3) == 'brand') { ?>
                                                     class="active"<?php } ?> href="<?php echo site_url('manage/template/brand') ?>">Brand</a></li>
@@ -129,7 +136,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </li>
                                 <li <?php if ($this->uri->segment(2) == 'config') { ?>
                                         class="active"<?php } ?>>
-                                    <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Situs</span><span class="fa arrow"></span></a>
+                                    <a href="<?php echo site_url('manage/config#') ?>"><i class="fa fa-cog"></i> <span class="nav-label">Situs</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li><a <?php if ($this->uri->segment(3) == 'general') { ?>
                                                     class="active"<?php } ?> href="<?php echo site_url('manage/config/general') ?>">General</a></li>                                             
@@ -156,12 +163,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         <!-- /#wrapper -->
         <!--end of footer-->
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/onepage/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/onepage/js/bootstrap.min.js"></script>
         <script src="//cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/jquery.slimscroll.min.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/theme/metisMenu.min.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>assets/js/theme/admin.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/onepage/js/jquery.slimscroll.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/onepage/js/theme/metisMenu.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/datatables/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/datatables/js/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>assets/onepage/js/theme/admin.js"></script>
         <?php
         if (!empty($assets_footer)) {
             foreach ($assets_footer as $asset) {
