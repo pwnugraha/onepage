@@ -33,7 +33,7 @@ class Auth extends CI_Controller {
             // redirect them to the home page because they must be an administrator to view this
             return show_error('You must be an administrator to view this page.');
         } else {
-            redirect('manage/dashboard', 'refresh');
+            //redirect('manage/dashboard', 'refresh');
             // set the flash data error message if there is one
             $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
@@ -42,9 +42,36 @@ class Auth extends CI_Controller {
             foreach ($this->data['users'] as $k => $user) {
                 $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
             }
+            //add some modificaion for child template
+            $this->datatemplate['template'] = array(
+                'child_template' => $this->_render_page('auth/index', $this->data, TRUE)
+            );
 
+            // render
+            $this->_render_page('manage/base_admin', $this->datatemplate['template']);
             //$this->_render_page('auth/index', $this->data);
         }
+    }
+
+    //op
+    public function confirmation() {
+        if ($this->ion_auth->is_admin()) {
+            // redirect them to the list user if as admin
+            $this->session->set_flashdata('message', $this->session->flashdata('message'));
+            redirect('auth', 'refresh');
+        }
+        if ($this->ion_auth->logged_in()) {
+            // redirect them to the dashboard page
+            redirect('manage/dashboard', 'refresh');
+        }
+        $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+        if (!isset($this->data['message'])) {
+            redirect('auth/login', 'refresh');
+        }
+        $this->datatemplate['template'] = array(
+            'child_template' => $this->_render_page('auth/confirmation', $this->data, TRUE)
+        );
+        $this->_render_page('auth/base_auth', $this->datatemplate['template']);
     }
 
     /**
@@ -229,7 +256,7 @@ class Auth extends CI_Controller {
             if ($forgotten) {
                 // if there were no errors
                 $this->session->set_flashdata('message', $this->ion_auth->messages());
-                redirect("auth/login", 'refresh'); //we should display a confirmation page here instead of the login page
+                redirect("auth/confirmation", 'refresh'); //we should display a confirmation page here instead of the login page
             } else {
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
                 redirect("auth/forgot_password", 'refresh');
@@ -325,7 +352,7 @@ class Auth extends CI_Controller {
      * @param string|bool $code The activation code
      */
     public function activate($id, $code = FALSE) {
-        show_404();
+        //show_404();
         if ($code !== FALSE) {
             $activation = $this->ion_auth->activate($id, $code);
         } else if ($this->ion_auth->is_admin()) {
@@ -335,7 +362,7 @@ class Auth extends CI_Controller {
         if ($activation) {
             // redirect them to the auth page
             $this->session->set_flashdata('message', $this->ion_auth->messages());
-            redirect("auth", 'refresh');
+            redirect("auth/confirmation", 'refresh');
         } else {
             // redirect them to the forgot password page
             $this->session->set_flashdata('message', $this->ion_auth->errors());
@@ -349,7 +376,7 @@ class Auth extends CI_Controller {
      * @param int|string|null $id The user ID
      */
     public function deactivate($id = NULL) {
-        show_404();
+        //show_404();
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
             // redirect them to the home page because they must be an administrator to view this
             return show_error('You must be an administrator to view this page.');
@@ -365,8 +392,12 @@ class Auth extends CI_Controller {
             // insert csrf check
             $this->data['csrf'] = $this->_get_csrf_nonce();
             $this->data['user'] = $this->ion_auth->user($id)->row();
-
-            $this->_render_page('auth/deactivate_user', $this->data);
+            //op
+            $this->datatemplate['template'] = array(
+                'child_template' => $this->_render_page('auth/deactivate_user', $this->data, TRUE)
+            );
+            $this->_render_page('manage/base_admin', $this->datatemplate['template']);
+            //$this->_render_page('auth/deactivate_user', $this->data);
         } else {
             // do we really want to deactivate?
             if ($this->input->post('confirm') == 'yes') {
@@ -382,6 +413,7 @@ class Auth extends CI_Controller {
             }
 
             // redirect them back to the auth page
+            $this->session->set_flashdata('message', $this->ion_auth->messages()); //op
             redirect('auth', 'refresh');
         }
     }
@@ -390,7 +422,7 @@ class Auth extends CI_Controller {
      * Create a new user
      */
     public function create_user() {
-        show_404();
+        //show_404();
         $this->data['title'] = $this->lang->line('create_user_heading');
 
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
@@ -410,7 +442,7 @@ class Auth extends CI_Controller {
         } else {
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email|is_unique[' . $tables['users'] . '.email]');
         }
-        $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
+        $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim|numeric|required');
         $this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
         $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
@@ -485,8 +517,11 @@ class Auth extends CI_Controller {
                 'type' => 'password',
                 'value' => $this->form_validation->set_value('password_confirm'),
             );
-
-            $this->_render_page('auth/create_user', $this->data);
+            $this->datatemplate['template'] = array(
+                'child_template' => $this->_render_page('auth/create_user', $this->data, TRUE)
+            );
+            $this->_render_page('manage/base_admin', $this->datatemplate['template']);
+            //$this->_render_page('auth/create_user', $this->data);
         }
     }
 
@@ -640,7 +675,7 @@ class Auth extends CI_Controller {
      * Create a new group
      */
     public function create_group() {
-        show_404();
+        //show_404();
         $this->data['title'] = $this->lang->line('create_group_title');
 
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
@@ -675,8 +710,11 @@ class Auth extends CI_Controller {
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('description'),
             );
-
-            $this->_render_page('auth/create_group', $this->data);
+            $this->datatemplate['template'] = array(
+                'child_template' => $this->_render_page('auth/create_group', $this->data, TRUE)
+            );
+            $this->_render_page('manage/base_admin', $this->datatemplate['template']);
+            //$this->_render_page('auth/create_group', $this->data);
         }
     }
 
@@ -686,7 +724,7 @@ class Auth extends CI_Controller {
      * @param int|string $id
      */
     public function edit_group($id) {
-        show_404();
+        //show_404();
         // bail if no group id given
         if (!$id || empty($id)) {
             redirect('auth', 'refresh');

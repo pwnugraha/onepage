@@ -23,6 +23,7 @@
                     <i class="glyphicon glyphicon-ban-circle"></i>
                     <span>Cancel upload</span>
                 </button>
+                <a class="btn btn-default" href="<?php echo site_url('manage/media/image')?>">Kembali</a>
                 <!-- The global file processing state -->
                 <span class="fileupload-process"></span>
             </div>

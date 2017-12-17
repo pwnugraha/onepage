@@ -1,14 +1,19 @@
 <div class="container-fluid">
     <div class="row">
+        <div id="infoMessage"><?php echo $message; ?></div>
         <div class="col-lg-12">
             <h2 class="page-header"><i class="fa fa-fw fa-user"></i><?php echo lang('edit_user_heading');?></h2>
         </div><br>
         <div class="col-sm-12">
-
-            <div id="infoMessage"><?php echo $message; ?></div>
             <p><?php echo lang('edit_user_subheading'); ?></p>
             <?php echo form_open('auth/edit_user/'.$user->id, 'class="form-horizontal" style="margin-bottom:50px;"'); ?>
 
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-align-left">Username:</label>
+                <div class="col-sm-4">
+                    <?php echo form_input('', $this->ion_auth->user()->row()->username, 'class="form-control disabled" disabled'); ?>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label text-align-left"><?php echo lang('edit_user_fname_label', 'first_name'); ?></label>
                 <div class="col-sm-4">
@@ -33,20 +38,8 @@
                     <?php echo form_input($phone, '', 'class="form-control"'); ?>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label text-align-left"><?php echo lang('edit_user_password_label', 'password'); ?></label>
-                <div class="col-sm-4">
-                    <?php echo form_input($password, '', 'class="form-control"'); ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label text-align-left"><?php echo lang('edit_user_password_confirm_label', 'password_confirm'); ?></label>
-                <div class="col-sm-4">
-                     <?php echo form_input($password_confirm, '', 'class="form-control"'); ?>
-                </div>
-            </div>
 
-            <?php if (!$this->ion_auth->is_admin() && $this->ion_auth->is_admin()): ?>
+            <?php if ($this->ion_auth->is_admin()): ?>
 
                 <h4><?php echo lang('edit_user_groups_heading'); ?></h4>
                 <?php foreach ($groups as $group): ?>

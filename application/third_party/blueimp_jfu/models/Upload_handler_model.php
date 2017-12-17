@@ -11,6 +11,7 @@ class Upload_handler_model extends CI_Model {
             'type' => $param->type,
             'temp' => $temp,
             'dir'  => $dir,
+            'alt_text' => 'image',
             'media_type' => $type,
             'created'  => date('Y-m-d H:i:s'),
             'modified'  => date('Y-m-d H:i:s'),

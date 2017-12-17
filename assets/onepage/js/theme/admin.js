@@ -23,15 +23,15 @@ $(function () {
     $('#checkall').change(function () {
         $('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
     });
-    
-    $('#delall').submit(function (e){
+
+    $('#delall').submit(function (e) {
         e.preventDefault();
         $('#delete-modal').modal('show');
         $('#btn-modal-delete').attr('href', '#');
-        $('#btn-modal-delete').click(function (){
+        $('#btn-modal-delete').click(function () {
             $('#delall')[0].submit();
         });
-        
+
     });
     $('#dtable').DataTable({
         ordering: true,
@@ -44,15 +44,17 @@ $(function () {
         ]
 
     });
-    $('#dimgtable').DataTable({
-        ordering: false,
-        searching: false,
-        "lengthChange": false,
-        "info": false,
-        "pageLength": 6
+    $('[data-toggle="popover"]').popover({
+        delay: {"hide": 2000}}
+    );
 
-    });
 });
+
+function copyText(e) {
+    var copyText = document.getElementById("source-img" + e.getAttribute('data-id'));
+    copyText.select();
+    document.execCommand("Copy");
+}
 
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.

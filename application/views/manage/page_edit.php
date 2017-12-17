@@ -99,6 +99,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><i class="fa fa-fw fa-camera"></i><strong> Media</strong></div>
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item" data-toggle="modal" data-target="#gallery-modal" data-backdrop="static" data-keyboard="false">
+                                Image Gallery
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="panel panel-default">
                         <div class="panel-heading"><i class="fa fa-fw fa-save"></i><strong>Simpan sebagai :</strong></div>
@@ -175,3 +185,4 @@
     </tr>
     {% } %}
 </script>
+<?php $this->load->view('manage/media/image/gallery')?>

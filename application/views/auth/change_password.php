@@ -1,6 +1,6 @@
-
 <div class="container-fluid">
     <div class="row">
+        <div id="infoMessage"><?php echo $message; ?></div>
         <div class="col-lg-12">
             <h2 class="page-header"><i class="fa fa-fw fa-key"></i>Ubah Password
             </h2>

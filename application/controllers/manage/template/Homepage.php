@@ -15,10 +15,13 @@ class Homepage extends AppBase {
         $data['homepage_background_template'] = $this->build_opt['homepage_background_template'];
         $data['homepage_editable_content'] = $this->build_opt['homepage_editable_content'];
         $data['homepage_content_title'] = $this->build_opt['homepage_content_title'];
+        $data['homepage_video'] = $this->build_opt['homepage_video'];
+        
         $data['theme'] = $this->base_model->get_join_item('result', 'media.id, define, value, media.name, dir', NULL, 'theme_settings', 'media', 'theme_settings.value = media.id', 'inner');
-
         $data['theme_contents'] = $this->base_model->get_item('result', 'theme_settings', 'define, value', array('define like' => '%homepage_editable_content%'), 'define ASC');
         $data['theme_contents_title'] = $this->base_model->get_item('result', 'theme_settings', 'define, value', array('define like' => '%homepage_content_title%', 'define ASC'));
+        $data['theme_homepage_video'] = $this->base_model->get_item('result', 'theme_settings', 'define, value', array('define like' => '%homepage_video%', 'define ASC'));
+        
         $i = 1;
         foreach ($data['theme_contents'] as $v) {
             $this->form_validation->set_rules($v['define'], 'Konten_' . $i, 'trim');
@@ -26,6 +29,10 @@ class Homepage extends AppBase {
         }
         foreach ($data['theme_contents_title'] as $v) {
             $this->form_validation->set_rules($v['define'], 'Judul konten_' . $i, 'trim');
+            $i++;
+        }
+        foreach ($data['theme_homepage_video'] as $v) {
+            $this->form_validation->set_rules($v['define'], 'Video_' . $i, 'trim');
             $i++;
         }
 
@@ -44,6 +51,12 @@ class Homepage extends AppBase {
                 );
                 $act = $this->base_model->update_item('theme_settings', $params, array('define' => 'homepage_content_title_' . $i));
             }
+            for ($i = 0; $i < $data['homepage_video']; $i++) {
+                $params = array(
+                    'value' => $this->input->post('homepage_video_' . $i, TRUE),
+                );
+                $act = $this->base_model->update_item('theme_settings', $params, array('define' => 'homepage_video_' . $i));
+            }
             if (!$act) {
                 $this->_result_msg('danger', 'Gagal menyimpan data');
             } else {
@@ -52,18 +65,18 @@ class Homepage extends AppBase {
             redirect('manage/template/homepage/index');
         }
     }
-
+    
     public function load($param = NULL) {
 
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             $options = [
-                'script_url' => site_url('manage/media/image/load'),
-                'upload_dir' => APPPATH . '../media/image/',
-                'upload_url' => base_url('media/image/'),
+                'script_url' => site_url('manage/template/homepage/load'),
+                'upload_dir' => APPPATH . '../media/template/',
+                'upload_url' => base_url('media/template/'),
                 'accept_file_types' => '/\.(gif|jpe?g|png)$/i',
-                'max_file_size' => 2000000,
+                'max_file_size' => 5000000,
                 'temp_save' => $param,
-                'dir' => 'media/image/',
+                'dir' => 'media/template/',
                 'media_type' => 'image',
                 'user' => $this->ion_auth->user()->row()->id
             ];

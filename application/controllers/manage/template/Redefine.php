@@ -40,6 +40,16 @@ class Redefine extends AppBase {
                 }
             }
         }
+        if ($this->build_opt['homepage_video'] > 0) {
+            for ($i = 0; $i < $this->build_opt['homepage_video']; $i++) {
+                $params = array(
+                    'define' => 'homepage_video_' . $i,
+                );
+                if (!$this->base_model->get_item('row', 'theme_settings', 'define', array('define' => $params['define']))) {
+                    $this->base_model->insert_item('theme_settings', $params);
+                }
+            }
+        }
         redirect('manage/dashboard');
     }
 

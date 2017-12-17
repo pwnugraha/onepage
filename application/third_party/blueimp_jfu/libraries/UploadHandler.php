@@ -161,8 +161,8 @@ class UploadHandler {
                     // 'jpeg_quality' => 70,
                     // 'no_cache' => true, (there's a caching option, but this remembers thumbnail sizes from a previous action!)
                     // 'strip' => true, (this strips EXIF tags, such as geolocation)
-                    'max_width' => 150, // either specify width, or set to 0. Then width is automatically adjusted - keeping aspect ratio to a specified max_height.
-                    'max_height' => 150 // either specify height, or set to 0. Then height is automatically adjusted - keeping aspect ratio to a specified max_width.
+                    'max_width' => 350, // either specify width, or set to 0. Then width is automatically adjusted - keeping aspect ratio to a specified max_height.
+                    'max_height' => 350 // either specify height, or set to 0. Then height is automatically adjusted - keeping aspect ratio to a specified max_width.
                 )
             ),
             'print_response' => true,

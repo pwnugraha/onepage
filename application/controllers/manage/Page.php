@@ -11,7 +11,7 @@ class Page extends AppBase {
     }
 
     public function index() {
-        $data['page'] = $this->base_model->get_join_item('result', 'posts.*, first_name, last_name', 'posts.id DESC', 'posts', 'users', 'posts.user_id=users.id', 'left', array('page_type' => 'page'));
+        $data['page'] = $this->base_model->get_join_item('result', 'posts.*, first_name, last_name', 'posts.id DESC', 'posts', 'users', 'posts.user_id=users.id', 'left', array('post_type' => 'page'));
         $this->admindisplay('manage/page', $data);
     }
 
@@ -31,7 +31,7 @@ class Page extends AppBase {
                 $this->base_model->insert_item('posts_terms', array('post_id' => $id, 'term_id' => $add));
                 echo "1";
             } else {
-                if (!$this->base_model->get_item('row', 'posts_terms', 'id', array('post_id' => $id, 'term_id' => $tag['id']))) {
+                if (!$this->base_model->get_item('row', 'posts_terms', '*', array('post_id' => $id, 'term_id' => $tag['id']))) {
                     $this->base_model->insert_item('posts_terms', array('post_id' => $id, 'term_id' => $tag['id']));
                 }
             }
@@ -90,7 +90,7 @@ class Page extends AppBase {
                     'title' => $this->input->post('title', TRUE),
                     'description' => $this->input->post('ck_description_field', TRUE),
                     'rel_url' => $slug,
-                    'page_type' => 'page',
+                    'post_type' => 'page',
                     'publish' => $this->input->post('save_as', TRUE),
                     'created' => date('Y-m-d H:i:s'),
                     'modified' => date('Y-m-d H:i:s'),
@@ -129,7 +129,7 @@ class Page extends AppBase {
             $data['assets_footer'] = $assets['assets_footer'];
             $media_id = NULL;
 
-            $data['page'] = $this->base_model->get_item('row', 'posts', '*', array('page_type' => 'page', 'id' => $id));
+            $data['page'] = $this->base_model->get_item('row', 'posts', '*', array('post_type' => 'page', 'id' => $id));
             if (!$data['page']) {
                 show_404();
             }

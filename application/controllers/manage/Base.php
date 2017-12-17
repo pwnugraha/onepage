@@ -13,12 +13,13 @@ class AppBase extends CI_Controller {
         $this->load->model('base_model');
         $this->_is_logged_in();
         $this->build_opt = array(
-            'banner_page' => array('home' => 2, 'download'=>3),
-            'built_in_page' => array('home','about', 'download', 'contact'),
+            'banner_page' => array('home' => 2),
+            'built_in_page' => array('home','article'),
             'max_banner' => 5,
             'homepage_background_template' => 3,
-            'homepage_editable_content' => 3,
-            'homepage_content_title' => 3
+            'homepage_editable_content' => 5,
+            'homepage_content_title' => 5,
+            'homepage_video' => 1,
             
         );
         

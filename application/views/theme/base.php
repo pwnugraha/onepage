@@ -28,7 +28,7 @@
 
         <!--Navigation-->
         <section class="menu cid-qBvtuOByMs" once="menu" id="menu1-e" data-rv-view="1092">
-            <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top collapsed bg-color transparent">
+            <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top collapsed bg-color <?php echo ($this->uri->segment(1) == NULL || $this->uri->segment(2)) ? 'transparent' : '' ?>">
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <div class="hamburger">
                         <span></span>
@@ -40,7 +40,7 @@
                 <div class="menu-logo">
                     <div class="navbar-brand">
                         <span class="navbar-logo">
-                            <a href="#">
+                            <a href="<?php echo site_url() ?>">
                                 <img src="<?php echo base_url() . $brand['dir'] . '' . $brand['name'] ?>" alt="Laundry" media-simple="true" style="height: 4.5rem;">
                             </a>
                         </span>
@@ -50,10 +50,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
                         <li class="nav-item">
-                            <a class="nav-link link text-white display-4" href="<?php echo site_url()?>">Home</a></li>
+                            <a class="nav-link link text-white display-4" href="<?php echo site_url() ?>">Home</a></li>
                         <li class="nav-item"><a class="nav-link link text-white display-4" href="<?php echo site_url('article') ?>">Artikel</a></li>
-                        <li class="nav-item"><a class="nav-link link text-white display-4" href="#">Service</a></li>
-                        <li class="nav-item"><a class="nav-link link text-white display-4" href="#">Contact Us</a></li>
+                        <?php foreach ($pages as $page) { ?>
+                            <li class="nav-item"><a class="nav-link link text-white display-4" href="<?php echo site_url('informasi/read/') . $page['rel_url'] ?>" class="text-white"><?php echo $page['title'] ?></a></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </nav>
@@ -70,14 +71,15 @@
                             </a>
                         </div>
                         <p class="mb-3 mbr-fonts-style foot-title display-7">LAUNDRY-IN</p>
-                        <p class="mbr-text mbr-fonts-style mbr-links-column display-7">Home<br><a href="#" class="text-white">A</a>rtikel
-                            <br><a href="#" class="text-white">S</a>ervice
-                            <br>Contact Us</p>
+                        <p class="mbr-text mbr-fonts-style mbr-links-column display-7"><a href="<?php echo site_url() ?>" class="text-white">Home</a><br>
+                            <a href="<?php echo site_url('article') ?>" class="text-white">Artikel</a>
+                            <?php foreach ($pages as $page) { ?>
+                                <br><a href="<?php echo site_url('informasi/read/') . $page['rel_url'] ?>" class="text-white"><?php echo $page['title'] ?></a>
+                            <?php } ?>
                     </div>
                     <div class="col-md-4 col-sm-8">
-                        <p class="mb-4 foot-title mbr-fonts-style display-7">RECENT NEWS</p>
-                        <p class="mbr-text mbr-fonts-style foot-text display-7">Proin ultricies suscipit placerat. Quisque luctus ac tellus varius malesuada.&nbsp;<br>
-                            <br>Vivamus a luctus purus. Suspendisse malesuada magna sit amet elementum scelerisque.&nbsp;</p>
+                        <p class="mb-4 foot-title mbr-fonts-style display-7">Artikel Terbaru</p>
+                        <a style="color: #ffffff" href="<?php echo site_url('article/read/' . $article['rel_url']) ?>"><?php echo (strlen($article['description']) > 200) ? mb_substr(ucwords($article['description']), 0, 200) . '...' : $article['description'] ?></a>
                     </div>
                     <div class="col-md-4 offset-md-1 col-sm-12">
                         <p class="mb-4 foot-title mbr-fonts-style display-7">Contact Us</p>
@@ -138,8 +140,5 @@
         <script src="<?php echo base_url('assets/laundry-in/') ?>assets/slidervideo/script.js"></script>
         <script src="<?php echo base_url('assets/laundry-in/') ?>assets/formoid/formoid.min.js"></script>
 
-
-<div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i></i></a></div>
-  <input name="animation" type="hidden">
     </body>
 </html>

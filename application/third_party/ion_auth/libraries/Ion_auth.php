@@ -61,12 +61,12 @@ class Ion_auth {
      * @author Ben
      */
     public function __construct() {
-        $this->load->add_package_path(APPPATH . 'third_party/phpmailer');//*
+        $this->load->add_package_path(APPPATH . 'third_party/phpmailer'); //*
         $this->config->load('ion_auth', TRUE);
-        $this->load->library(array('email', 'pmail'));//*
+        $this->load->library(array('email', 'pmail')); //*
         $this->lang->load('ion_auth');
         $this->load->helper(array('cookie', 'language', 'url'));
-        
+
         $this->load->library('session');
 
         $this->load->model('ion_auth_model');
@@ -326,6 +326,14 @@ class Ion_auth {
             if (!$this->config->item('use_ci_email', 'ion_auth')) {
                 $this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful', 'activation_email_successful'));
                 $this->set_message('activation_email_successful');
+                $params = array(
+                    'message' => $this->load->view($this->config->item('email_templates', 'ion_auth') . $this->config->item('email_activate', 'ion_auth'), $data, TRUE),
+                    'from_email' => $this->config->item('admin_email', 'ion_auth'),
+                    'from_name' => $this->config->item('site_title', 'ion_auth'),
+                    'to' => $email,
+                    'subject' => $this->config->item('site_title', 'ion_auth') . ' - ' . $this->lang->line('email_activation_subject'),
+                );
+                $this->pmail->sendmail($params);
                 return $data;
             } else {
                 $message = $this->load->view($this->config->item('email_templates', 'ion_auth') . $this->config->item('email_activate', 'ion_auth'), $data, true);

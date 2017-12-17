@@ -19,13 +19,13 @@ class Banner extends AppBase {
 
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             $options = [
-                'script_url' => site_url('manage/media/image/load'),
-                'upload_dir' => APPPATH . '../media/image/',
-                'upload_url' => base_url('media/image/'),
+                'script_url' => site_url('manage/template/banner/load'),
+                'upload_dir' => APPPATH . '../media/template/banner/',
+                'upload_url' => base_url('media/template/banner/'),
                 'accept_file_types' => '/\.(gif|jpe?g|png)$/i',
-                'max_file_size' => 2000000,
+                'max_file_size' => 5000000,
                 'temp_save' => 'banner',
-                'dir' => 'media/image/',
+                'dir' => 'media/template/banner/',
                 'media_type' => 'image',
                 'user' => $this->ion_auth->user()->row()->id
             ];

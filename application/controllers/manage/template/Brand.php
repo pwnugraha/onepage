@@ -38,13 +38,13 @@ class Brand extends AppBase {
 
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             $options = [
-                'script_url' => site_url('manage/media/image/load'),
-                'upload_dir' => APPPATH . '../media/image/',
-                'upload_url' => base_url('media/image/'),
+                'script_url' => site_url('manage/template/brand/load'),
+                'upload_dir' => APPPATH . '../media/template/brand/',
+                'upload_url' => base_url('media/template/brand/'),
                 'accept_file_types' => '/\.(gif|jpe?g|png)$/i',
-                'max_file_size' => 2000000,
+                'max_file_size' => 5000000,
                 'temp_save' => 'brand',
-                'dir' => 'media/image/',
+                'dir' => 'media/template/brand/',
                 'media_type' => 'image',
                 'user' => $this->ion_auth->user()->row()->id
             ];

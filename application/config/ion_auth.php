@@ -90,7 +90,7 @@ $config['admin_group'] = 'admin';             // Default administrators group, u
 $config['identity'] = 'email';             // You can use any unique column in your table as identity column. The values in this column, alongside password, will be used for login purposes
 $config['min_password_length'] = 8;                   // Minimum Required Length of Password
 $config['max_password_length'] = 20;                  // Maximum Allowed Length of Password
-$config['email_activation'] = FALSE;               // Email Activation for registration
+$config['email_activation'] = TRUE;               // Email Activation for registration
 $config['manual_activation'] = FALSE;               // Manual Activation for registration
 $config['remember_users'] = TRUE;                // Allow users to be remembered and enable auto-login
 $config['user_expire'] = 86500;               // How long to remember the user (seconds). Set to zero for no expiration
@@ -188,7 +188,7 @@ $config['store_salt'] = FALSE;
   | -------------------------------------------------------------------------
  */
 $config['delimiters_source'] = 'config';  // "config" = use the settings defined here, "form_validation" = use the settings defined in CI's form validation library
-$config['message_start_delimiter'] = '<p>';  // Message start delimiter
-$config['message_end_delimiter'] = '</p>';  // Message end delimiter
-$config['error_start_delimiter'] = '<p>';  // Error message start delimiter
-$config['error_end_delimiter'] = '</p>'; // Error message end delimiter
+$config['message_start_delimiter'] = '<div class="alert alert-success alert-dismissible" style="margin-bottom: 0; margin-top: 20px" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>';  // Message start delimiter
+$config['message_end_delimiter'] = '</strong></div>';  // Message end delimiter
+$config['error_start_delimiter'] = '<div class="alert alert-danger alert-dismissible" style="margin-bottom: 0; margin-top: 20px" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>';  // Error message start delimiter
+$config['error_end_delimiter'] = '</strong></div>'; // Error message end delimiter

@@ -5,7 +5,7 @@
             </h2>
         </div><br>
         <!-- The file upload form used as target for the file upload widget -->
-        <?php echo form_open('manage/template/homepage/load/'.$param, 'id="fileupload" enctype="multipart/form-data"') ?>
+        <?php echo form_open('manage/template/homepage/load/' . $param, 'id="fileupload" enctype="multipart/form-data"') ?>
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="row fileupload-buttonbar">
             <div class="col-lg-7">
@@ -23,6 +23,7 @@
                     <i class="glyphicon glyphicon-ban-circle"></i>
                     <span>Cancel upload</span>
                 </button>
+                <a class="btn btn-default" href="<?php echo site_url('manage/template/homepage') ?>">Kembali</a>
                 <!-- The global file processing state -->
                 <span class="fileupload-process"></span>
             </div>

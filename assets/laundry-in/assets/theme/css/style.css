@@ -3,7 +3,7 @@
  * Copyright 2017 Mobirise
  */
 section {
-  background-color: #eeeeee; }
+  background-color: #059087; }
 
 section,
 .container,
@@ -423,4 +423,14 @@ nav .mbr-section-btn {
 	padding: 0;
 	top: 0;
 	left: -2400px;
+}
+
+/*revisi */
+.thumbnail {
+    position: relative;
+    padding: 0px;
+    margin-bottom: 20px;
+}
+.thumbnail img {
+    width: 100%;
 }

@@ -7,77 +7,74 @@
             </div>
         <?php } ?>
         <div class="col-lg-12">
-            <h2 class="page-header"><i class="fa fa-fw fa-camera"></i>Image
+            <h2 class="page-header"><i class="fa fa-fw fa-image"></i>Image
             </h2>
         </div><br>
     </div>
-    <div class="text-right">
-        <a href="<?php echo site_url('manage/media/image/upload') ?>" class="btn btn-primary"><i class="fa fa-fw fa-upload"></i>&nbsp;Upload</a>
-    </div>
+    <?php echo form_open(site_url('manage/media/image/delete_all'), 'id="delall"') ?>
+    <div class="col-lg-12">
+        <?php if ($image) { ?>
+            <div class="float-left">
+                <button type="submit" class="btn btn-default" id="delete_all"><i class="fa fa-fw fa-trash"></i></button>
+            </div>
+        <?php } ?>
+        <div class="text-right">
+            <a href="<?php echo site_url('manage/media/image/upload') ?>" class="btn btn-primary"><i class="fa fa-fw fa-upload"></i>&nbsp;Upload</a>
+        </div>
+    </div><br>
     <?php if ($image == FALSE) { ?>
-        <h4 class="text-center">Data Banner kosong. Klik 'Upload' untuk menambahkan banner.</h4>
+        <br>
+        <h4 class="text-center">Data Image kosong. Klik 'Upload' untuk menambahkan halaman</h4>
     <?php } else { ?>
         <div class="col-lg-12">
             <div class="row">
                 <div class = "col-xs-12 col-sm-12">
                     <div class="table-responsive">
-                        <table class="table table-responsive" id="dimgtable">
+                        <table class="table table-hover" id="dtable">
                             <thead>
                                 <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th class="text-center no-sort"><input type="checkbox" id="checkall" name="checkall"/></th>
+                                    <th class="">No</th>
+                                    <th class="text-center">Image</th>
+                                    <th class="text-center">Diupload oleh</th>
+                                    <th class="text-center">Tipe file</th>
+                                    <th class="text-center">Ukuran file</th>
+                                    <th class="text-center">Diperbarui</th>
+                                    <th class="text-center no-sort"><i class="fa fa-cogs"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                $no = 0;
+                                $no = 1;
                                 foreach ($image as $i) {
-                                    $no+=1;
-                                    if ($no % 5 == 1) {
-                                        ?>
-
-                                        <tr>
-                                            <td class="text-center" style="border: none"><img class="img-thumbnail" style="height: auto" src="<?php echo base_url() . $i['dir'] . 'thumbnail/' . $i['name'] ?>"><div class="clearfix" style="margin-top: 5px"></div>
-                                                <a href="<?php echo site_url('manage/media/image/edit/' . $i['id']) ?>" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-edit text-primary"></i></a>
-                                                <button id="delete" type="button" class="btn btn-default btn-sm" data-url="<?php echo site_url('manage/media/image/delete/' . $i['id']) ?>" data-toggle="modal" data-target="#delete-modal" data-backdrop="static" data-keyboard="false" title="Hapus"><i class="fa fa-close text-danger"></i></button>
-                                            </td>
-                                        <?php } else if ($no % 5 == 0) { ?>
-                                            <td class="text-center" style="border: none"><img class="img-thumbnail" src="<?php echo base_url() . $i['dir'] . 'thumbnail/' . $i['name'] ?>"><div class="clearfix" style="margin-top: 5px"></div>
-                                                <a href="<?php echo site_url('manage/media/image/edit/' . $i['id']) ?>" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-edit text-primary"></i></a>
-                                                <button id="delete" type="button" class="btn btn-default btn-sm" data-url="<?php echo site_url('manage/media/image/delete/' . $i['id']) ?>" data-toggle="modal" data-target="#delete-modal" data-backdrop="static" data-keyboard="false" title="Hapus"><i class="fa fa-close text-danger"></i></button>
-                                            </td>
-
-                                        </tr>
-                                    <?php } else { ?>
-                                    <td class="text-center" style="border: none"><img class="img-thumbnail" src="<?php echo base_url() . $i['dir'] . 'thumbnail/' . $i['name'] ?>"><div class="clearfix" style="margin-top: 5px"></div>
-                                        <a href="<?php echo site_url('manage/media/image/edit/' . $i['id']) ?>" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-edit text-primary"></i></a>
-                                        <button id="delete" type="button" class="btn btn-default btn-sm" data-url="<?php echo site_url('manage/media/image/delete/' . $i['id']) ?>" data-toggle="modal" data-target="#delete-modal" data-backdrop="static" data-keyboard="false" title="Hapus"><i class="fa fa-close text-danger"></i></button>
-                                    </td>
-
-                                    <?php
-                                }
-                            }
-                            $mod = $no % 5;
-                            if ($mod != 0) {
-                                for ($a = 0; $a < 5 - $mod; $a++) {
                                     ?>
-                                    <td style="border: none"></td>
+
+                                    <tr>
+                                        <td class="text-center"><input type="checkbox" id="pcheck[]" name="pcheck[]" value="<?php echo $i['id'] ?>"/></td>
+                                        <td class=""><?php echo $no ?></td>
+                                        <td class=""><a download="<?php echo $i['name']?>" href="<?php echo base_url().$i['dir'].$i['name']?>"><img class="img-thumbnail img-responsive" src="<?php echo base_url().$i['dir'].'thumbnail/'.$i['name'] ?>"></a></td>
+                                        <td class="text-center"><?php echo $i['first_name'] . " " . $i['last_name'] ?></td>
+                                        <td class="text-center"><?php echo $i['type']?></td>
+                                        <td class="text-center"><?php echo $i['size']?></td>
+                                        <td class="text-center"><?php echo date('d-m-Y H:i', strtotime($i['modified'])) ?></td>
+                                        <td class="text-center">
+                                            <a href="<?php echo site_url('manage/media/image/edit/' . $i['id']) ?>" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-edit text-primary"></i></a>
+                                            <button id="delete" type="button" class="btn btn-default btn-sm" data-url="<?php echo site_url('manage/media/image/delete/' . $i['id']) ?>" data-toggle="modal" data-target="#delete-modal" data-backdrop="static" data-keyboard="false" title="Hapus"><i class="fa fa-close text-danger"></i></button>
+                                        </td>
+                                    </tr>
                                     <?php
+                                    $no+=1;
                                 }
-                                echo '</tr>';
-                            }
-                            ?>
+                                ?>
                             </tbody>
-                        </table><br>
+                        </table>
                     </div>
                 </div>
-            <?php }
-            ?>
+            </div>
         </div>
-    </div>
+    <?php }
+    ?>
+    <?php echo form_close() ?>
     <div class="clearfix"></div> 
 </div>
 <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">

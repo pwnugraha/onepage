@@ -68,29 +68,51 @@
     }
     ?>
     <?php
-    $i = 1;
     echo form_open('manage/template/homepage/', 'class="form-horizontal" style="margin-bottom:50px"');
-    foreach ($theme_contents as $v) {
-        $k=$i-1;
-        ?>
-        <div class="form-group">
-            <label class="col-sm-2 control-label text-align-left">Judul Konten <?php echo $i ?></label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="<?php echo $theme_contents_title[$k]['define']?>" value="<?php echo $theme_contents_title[$k]['value']?>">
+    if (!empty($theme_homepage_video)) {
+        $i = 1;
+        echo '<h3 class="text-muted">Video</h3><br>';
+        foreach ($theme_homepage_video as $video) {
+            ?>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-align-left">Video URL <?php echo $i?></label>
+                <div class="col-sm-6">
+                    <code style="word-break: break-all">Contoh: https://www.youtube.com/watch?v=LSElrAJcm9s</code>
+                    <input type="text" class="form-control" id="url" name="<?php echo $video['define'] ?>" value="<?php echo $video['value'] ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label text-align-left">Deskripsi Konten <?php echo $i ?></label>
-            <div class="col-sm-6">
-                <textarea class="form-control" name="<?php echo $v['define'] ?>" rows="6"><?php echo $v['value'] ?></textarea>
+            <?php
+            $i++;
+        }
+        echo '<hr>';
+    }
+    if (!empty($theme_contents)) {
+        $i = 1;
+        echo '<h3 class="text-muted">Konten</h3><br>';
+        foreach ($theme_contents as $v) {
+            $k = $i - 1;
+            ?>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-align-left">Judul Konten <?php echo $i ?></label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="<?php echo $theme_contents_title[$k]['define'] ?>" value="<?php echo $theme_contents_title[$k]['value'] ?>">
+                </div>
             </div>
-        </div>
-        <?php $i++;
-    } ?>
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-align-left">Deskripsi Konten <?php echo $i ?></label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="<?php echo $v['define'] ?>" rows="6"><?php echo $v['value'] ?></textarea>
+                </div>
+            </div>
+            <?php
+            $i++;
+        }
+    }
+    ?>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-6">
             <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>Simpan</button>
         </div>
     </div>
-<?php echo form_close() ?>
+    <?php echo form_close() ?>
 </div>

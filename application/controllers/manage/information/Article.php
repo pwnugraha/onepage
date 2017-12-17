@@ -11,7 +11,7 @@ class Article extends AppBase {
     }
 
     public function index() {
-        $data['page'] = $this->base_model->get_join_item('result', 'posts.*, first_name, last_name', 'posts.id DESC', 'posts', 'users', 'posts.user_id=users.id', 'left', array('page_type' => 'article'));
+        $data['page'] = $this->base_model->get_join_item('result', 'posts.*, first_name, last_name', 'posts.id DESC', 'posts', 'users', 'posts.user_id=users.id', 'left', array('post_type' => 'article'));
         $this->admindisplay('manage/information/article/article', $data);
     }
 
@@ -55,6 +55,7 @@ class Article extends AppBase {
             //$this->load->library("uploadhandler", $options);
             $this->load->library("custom_uploadhandler", $options);
         } else {
+            $data['image'] = $this->base_model->get_join_item('result', 'media.*, first_name, last_name', 'media.id DESC', 'media', 'users', 'media.user_id=users.id', 'left', array('media_type' => 'image'));
             $assets = $this->_assets();
             $data['assets_header'] = $assets['assets_header'];
             $data['assets_footer'] = $assets['assets_footer'];
@@ -90,7 +91,7 @@ class Article extends AppBase {
                     'title' => $this->input->post('title', TRUE),
                     'description' => $this->input->post('ck_description_field', TRUE),
                     'rel_url' => $slug,
-                    'page_type' => 'article',
+                    'post_type' => 'article',
                     'publish' => $this->input->post('save_as', TRUE),
                     'created' => date('Y-m-d H:i:s'),
                     'modified' => date('Y-m-d H:i:s'),
@@ -124,12 +125,14 @@ class Article extends AppBase {
             //$this->load->library("uploadhandler", $options);
             $this->load->library("custom_uploadhandler", $options);
         } else {
+            $data['image'] = $this->base_model->get_join_item('result', 'media.*, first_name, last_name', 'media.id DESC', 'media', 'users', 'media.user_id=users.id', 'left', array('media_type' => 'image'));
+
             $assets = $this->_assets();
             $data['assets_header'] = $assets['assets_header'];
             $data['assets_footer'] = $assets['assets_footer'];
             $media_id = NULL;
 
-            $data['page'] = $this->base_model->get_item('row', 'posts', '*', array('page_type' => 'article', 'id' => $id));
+            $data['page'] = $this->base_model->get_item('row', 'posts', '*', array('post_type' => 'article', 'id' => $id));
             if (!$data['page']) {
                 show_404();
             }

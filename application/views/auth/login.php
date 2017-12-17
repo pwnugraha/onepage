@@ -35,17 +35,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="form-top-left">
                                     <h3>Login</h3>
                                     <span>Masukkan username dan password:</span>
-                                    <div id="infoMessage"><span class="text-danger"><?php echo $message; ?></span></div>
+                                    
                                 </div>
                                 <div class="form-top-right">
                                     <i class="fa fa-lock"></i>
                                 </div>
                             </div>
-                            <div class="form-bottom">
+                            <div class="form-bottom" style="padding-top: 1px">
+                                <div id="infoMessage"><?php echo $message; ?></div>
                                 <?php echo form_open("auth/login", 'class="login-form"'); ?>
+                                <br>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-username">Username</label>
-                                    <?php echo form_input($identity, '', 'class="form-username form-control" placeholder="Username..."'); ?>
+                                    <?php echo form_input($identity, '', 'class="form-username form-control" placeholder="Email..."'); ?>
                                 </div>
 
                                 <div class="form-group">

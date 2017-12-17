@@ -11,7 +11,10 @@ class Image extends AppBase {
     }
 
     public function index() {
-        $data['image'] = $this->base_model->get_item('result', 'media', NULL, NULL);
+        $data['image'] = $this->base_model->get_join_item('result', 'media.*, first_name, last_name', 'media.id DESC', 'media', 'users', 'media.user_id=users.id', 'left', array('media_type' => 'image', 'dir' =>'media/image/'));
+        foreach ($data['image'] as &$v) {
+            $v['size'] = $this->_getFileSize($v['size']);
+        }
         $this->admindisplay('manage/media/image/index', $data);
     }
 
@@ -23,7 +26,7 @@ class Image extends AppBase {
                 'upload_dir' => APPPATH . '../media/image/',
                 'upload_url' => base_url('media/image/'),
                 'accept_file_types' => '/\.(gif|jpe?g|png)$/i',
-                'max_file_size' => 2000000,
+                'max_file_size' => 5000000,
                 'dir' => 'media/image/',
                 'media_type' => 'image',
                 'user' => $this->ion_auth->user()->row()->id
@@ -57,10 +60,11 @@ class Image extends AppBase {
     }
 
     public function edit($id) {
-        $data['image'] = $this->base_model->get_item('row', 'media', NULL, array('id' => $id));
+        $data['image'] = $this->base_model->get_join_item('row', 'media.*, first_name, last_name', NULL, 'media', 'users', 'media.user_id=users.id', 'inner', array('media.id' => $id));
         if (!$data['image']) {
             show_404();
         }
+        $data['image']['size'] = $this->_getFileSize($data['image']['size']);
         $this->form_validation->set_rules('title', 'Title', 'trim');
         $this->form_validation->set_rules('description', 'Description', 'trim');
         $this->form_validation->set_rules('caption', 'Caption', 'trim');
@@ -103,6 +107,30 @@ class Image extends AppBase {
         }
         redirect('manage/media/image');
     }
+    
+    public function delete_all() {
+        $data = $this->input->post('pcheck');
+        if (!empty($data)) {
+            foreach ($data as $value) {
+                $file = $this->base_model->get_item('row', 'media', 'id, dir, name', array('id' => $value));
+                if (!$file) {
+                    $this->_result_msg('danger', 'Gagal menghapus data');
+                    redirect('manage/media/image');
+                } else {
+                    $result = $this->base_model->delete_item('media', array('id' => $value));
+                    if ($result) {
+                        $this->_delete_file_photo($file);
+                        $this->_result_msg('success', 'Data telah dihapus');
+                    } else {
+                        $this->_result_msg('danger', 'Gagal menghapus data');
+                    }
+                }
+            }
+        } else {
+            $this->_result_msg('danger', 'Tidak ada data yang dipilih');
+        }
+        redirect('manage/media/image');
+    }
 
     public function _delete_file_photo($file) {
         if (unlink($file['dir'] . $file['name']) && unlink($file['dir'] . 'thumbnail/' . $file['name'])) {
@@ -110,6 +138,25 @@ class Image extends AppBase {
         } else {
             return FALSE;
         }
+    }
+
+    // Snippet from PHP Share: http://www.phpshare.org
+    function _getFileSize($bytes) {
+        if ($bytes >= 1073741824) {
+            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+        } elseif ($bytes >= 1048576) {
+            $bytes = number_format($bytes / 1048576, 2) . ' MB';
+        } elseif ($bytes >= 1024) {
+            $bytes = number_format($bytes / 1024, 2) . ' KB';
+        } elseif ($bytes > 1) {
+            $bytes = $bytes . ' bytes';
+        } elseif ($bytes == 1) {
+            $bytes = $bytes . ' byte';
+        } else {
+            $bytes = '0 bytes';
+        }
+
+        return $bytes;
     }
 
 }
