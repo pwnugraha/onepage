@@ -17,14 +17,18 @@ class Article extends AppBaseSite {
         $data['banner_section_1'] = $this->base_model->get_join_item('result', 'media.name, dir', 'sort ASC', 'banners', 'media', 'banners.media_id = media.id', 'inner', array('section' => 1, 'autoload' => 'yes'));
         $data['banner_section_2'] = $this->base_model->get_join_item('result', 'media.name, dir', 'sort ASC', 'banners', 'media', 'banners.media_id = media.id', 'inner', array('section' => 2, 'autoload' => 'yes'));
 
-        $data['articles'] = $this->base_model->get_join_item('result', 'posts.*, media.title as media_title, media.alt_text, media.dir, media.name', 'posts.id DESC', 'posts', 'media', 'posts.image=media.id', 'left', array('post_type' => 'article'));
+        $data['articles'] = $this->base_model->get_join_item('result', 'posts.*, media.title as media_title, media.alt_text, media.dir, media.name', 'posts.id DESC', 'posts', 'media', 'posts.image=media.id', 'left', array('post_type' => 'article', 'publish' => 'yes'));
 
-        $this->siteview('theme/article', $data);
+        //$this->siteview('theme/article', $data);
+        //genpi
+        $this->siteview('theme/genpi/article', $data);
     }
 
     public function read($uri) {
         $data['post'] = $this->base_model->get_join_item('row', 'posts.*, media.title as media_title, media.alt_text, media.dir, media.name', NULL, 'posts', 'media', 'posts.image=media.id', 'left', array('rel_url' => $uri));
-        $this->siteview('theme/content', $data);
+        //$this->siteview('theme/content', $data);
+        //genpi
+        $this->siteview('theme/genpi/content', $data);
     }
 
 }

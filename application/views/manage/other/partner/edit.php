@@ -13,11 +13,11 @@
             </div>
         <?php } ?>
         <div class="col-lg-12">
-            <h2 class="page-header"><i class="fa fa-fw fa-edit"></i> Informasi Image
+            <h2 class="page-header"><i class="fa fa-fw fa-edit"></i> Informasi Partner
             </h2>
         </div>
     </div><br>
-    <?php echo form_open('manage/media/image/edit/' . $image['id'], 'style="margin-bottom:50px;"'); ?>
+    <?php echo form_open('manage/other/partner/edit/' . $image['id'], 'style="margin-bottom:50px;"'); ?>
     <div class="col-sm-8">
         <div class="row">
             <div class="col-sm-12">
@@ -98,7 +98,7 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>Simpan</button>
-                    <a href="<?php echo site_url('manage/media/image') ?>" class="btn btn-default">Kembali</a>
+                    <a href="<?php echo site_url('manage/other/partner') ?>" class="btn btn-default">Kembali</a>
                 </div>
             </div>
         </div>

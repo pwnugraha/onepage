@@ -108,17 +108,55 @@ class Banner extends AppBase {
     }
 
     public function delete($id) {
-        if (!$this->base_model->get_item('row', 'banners', 'id', array('id' => $id))) {
+        $item = $this->base_model->get_item('row', 'banners', 'media_id', array('id' => $id));
+        if (!$item) {
             $this->_result_msg('danger', 'Gagal menghapus data');
         } else {
-            $result = $this->base_model->delete_item('banners', array('id' => $id));
+            $file = $this->base_model->get_item('row', 'media', 'id, dir, name', array('id' => $item['media_id']));
+            $result = $this->base_model->delete_item('media', array('id' => $item['media_id']));
             if ($result) {
+                $this->base_model->delete_item('banners', array('id' => $id));
+                $this->_delete_file_photo($file);
                 $this->_result_msg('success', 'Data telah dihapus');
             } else {
                 $this->_result_msg('danger', 'Gagal menghapus data');
             }
         }
         redirect('manage/template/banner');
+    }
+
+    public function delete_all() {
+        $data = $this->input->post('pcheck');
+        if (!empty($data)) {
+            foreach ($data as $value) {
+                $item = $this->base_model->get_item('row', 'banners', 'media_id', array('id' => $value));
+                if (!$item) {
+                    $this->_result_msg('danger', 'Gagal menghapus data');
+                    redirect('manage/template/banner');
+                } else {
+                    $file = $this->base_model->get_item('row', 'media', 'id, dir, name', array('id' => $item['media_id']));
+                    $result = $this->base_model->delete_item('media', array('id' => $item['media_id']));
+                    if ($result) {
+                        $this->base_model->delete_item('banners', array('id' => $value));
+                        $this->_delete_file_photo($file);
+                        $this->_result_msg('success', 'Data telah dihapus');
+                    } else {
+                        $this->_result_msg('danger', 'Gagal menghapus data');
+                    }
+                }
+            }
+        } else {
+            $this->_result_msg('danger', 'Tidak ada data yang dipilih');
+        }
+        redirect('manage/template/banner');
+    }
+
+    public function _delete_file_photo($file) {
+        if (unlink($file['dir'] . $file['name']) && unlink($file['dir'] . 'thumbnail/' . $file['name'])) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     public function sort_check() {
@@ -128,7 +166,7 @@ class Banner extends AppBase {
         $sort = $this->input->post('sort');
         $autoload = $this->input->post('autoload');
         if ($autoload == 'yes') {
-            if (!$this->base_model->get_item('row', 'banners', 'sort', array('sort' => $sort, 'section' => $this->input->post('section'), 'autoload' => $autoload, 'id NOT IN ('.$this->input->post('id').')' => NULL))) {
+            if (!$this->base_model->get_item('row', 'banners', 'sort', array('sort' => $sort, 'section' => $this->input->post('section'), 'autoload' => $autoload, 'id NOT IN (' . $this->input->post('id') . ')' => NULL))) {
                 return TRUE;
             } else {
                 $this->form_validation->set_message('sort_check', 'Urutan banner yang ditampilkan tidak boleh sama.');

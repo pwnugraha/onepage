@@ -13,11 +13,11 @@
             </div>
         <?php } ?>
         <div class="col-lg-12">
-            <h2 class="page-header"><i class="fa fa-fw fa-plus"></i>Tambah <?php echo ucwords($uri)?>
+            <h2 class="page-header"><i class="fa fa-fw fa-plus"></i>Tambah <?php echo ucwords($uri) ?>
             </h2>
         </div><br>
         <div class="col-sm-12">
-            <?php echo form_open('manage/post/create/'. $post_type, 'id="fileupload" enctype="multipart/form-data"'); ?>
+            <?php echo form_open('manage/post/create/' . $post_type, 'id="fileupload" enctype="multipart/form-data"'); ?>
             <div class="col-sm-9">
                 <div class="panel panel-default">
                     <div class="panel-heading"><i class="fa fa-fw fa-pencil"></i><strong>Konten</strong></div>
@@ -103,7 +103,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body text-center">
                         <button type="submit" class="btn btn-primary">Simpan</button>&nbsp;&nbsp;&nbsp;
-                        <a href="<?php echo site_url('manage/post/show/'.$post_type) ?>" class="btn btn-default">Kembali</a>
+                        <a href="<?php echo site_url('manage/post/show/' . $post_type) ?>" class="btn btn-default">Kembali</a>
                     </div>
                 </div>
             </div>
@@ -142,7 +142,7 @@
     <td>
     <span class="preview">
     {% if (file.thumbnailUrl) { %}
-    <img src="{%=file.thumbnailUrl%}">
+    <img class="img-responsive" src="{%=file.thumbnailUrl%}">
     {% } %}
     </span>
     </td>
@@ -165,4 +165,4 @@
     </tr>
     {% } %}
 </script>
-<?php $this->load->view('manage/media/image/gallery')?>
+<?php $this->load->view('manage/media/image/gallery') ?>

@@ -45,20 +45,20 @@ class Post extends AppBase {
         $data['post_type'] = $uri;
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
             $options = [
-                'script_url' => site_url('manage/media/image/load'),
-                'upload_dir' => APPPATH . '../media/image/',
-                'upload_url' => base_url('media/image/'),
+                'script_url' => site_url('manage/post/create'),
+                'upload_dir' => APPPATH . '../media/'.$uri.'/',
+                'upload_url' => base_url('media/'.$uri.'/'),
                 'accept_file_types' => '/\.(gif|jpe?g|png)$/i',
                 'max_file_size' => 5000000,
                 'temp_save' => NULL,
-                'dir' => 'media/image/',
+                'dir' => 'media/'.$uri.'/',
                 'media_type' => 'image',
                 'user' => $this->ion_auth->user()->row()->id
             ];
             //$this->load->library("uploadhandler", $options);
             $this->load->library("custom_uploadhandler", $options);
         } else {
-            $data['image'] = $this->base_model->get_join_item('result', 'media.*, first_name, last_name', 'media.id DESC', 'media', 'users', 'media.user_id=users.id', 'left', array('media_type' => 'image'));
+            $data['image'] = $this->base_model->get_join_item('result', 'media.*, first_name, last_name', 'media.id DESC', 'media', 'users', 'media.user_id=users.id', 'left', array('media_type' => 'image', 'dir' => 'media/image/'));
             $assets = $this->_assets();
             $data['assets_header'] = $assets['assets_header'];
             $data['assets_footer'] = $assets['assets_footer'];
@@ -130,7 +130,7 @@ class Post extends AppBase {
             //$this->load->library("uploadhandler", $options);
             $this->load->library("custom_uploadhandler", $options);
         } else {
-            $data['image'] = $this->base_model->get_join_item('result', 'media.*, first_name, last_name', 'media.id DESC', 'media', 'users', 'media.user_id=users.id', 'left', array('media_type' => 'image'));
+            $data['image'] = $this->base_model->get_join_item('result', 'media.*, first_name, last_name', 'media.id DESC', 'media', 'users', 'media.user_id=users.id', 'left', array('media_type' => 'image', 'dir'=>'media/image/'));
             $assets = $this->_assets();
             $data['assets_header'] = $assets['assets_header'];
             $data['assets_footer'] = $assets['assets_footer'];
@@ -252,7 +252,7 @@ class Post extends AppBase {
             'asset_11' => '<script src="' . base_url() . 'assets/blueimp/js/main.js"></script>',
             'asset_12' => '<script src="//cdn.ckeditor.com/4.6.1/standard/ckeditor.js"></script>',
             'asset_13' => '<script type="text/javascript">
-                CKEDITOR.plugins.addExternal(\'youtube\', \''.base_url('plugin/ckeditor/youtube/').'\', \'plugin.js\');
+                CKEDITOR.plugins.addExternal(\'youtube\', \''.base_url('plugins/ckeditor/youtube/').'\', \'plugin.js\');
             </script>',
             'asset_14' => '<script>CKEDITOR.replace(\'ck_description_field\', {height:300, extraPlugins: \'youtube\'});</script>',
         );
@@ -277,10 +277,11 @@ class Post extends AppBase {
     }
 
     public function slug_check() {
-        if (!$this->input->post('rel_url')) {
-            show_404();
-        }
         $rel_url = $this->input->post('rel_url');
+        if (!$rel_url) {
+            $this->form_validation->set_message('slug_check', 'Bidang Link dibutuhkan.');
+            return FALSE;
+        }
         if (!$this->base_model->get_item('row', 'posts', 'rel_url', array('rel_url' => $rel_url, 'id NOT IN (' . $this->input->post('id') . ')' => NULL))) {
             return TRUE;
         } else {

@@ -24,7 +24,7 @@
     </div><br>
     <?php if ($image == FALSE) { ?>
         <br>
-        <h4 class="text-center">Data Image kosong. Klik 'Upload' untuk menambahkan halaman</h4>
+        <h4 class="text-center">Data Image kosong. Klik 'Upload' untuk menambahkan image</h4>
     <?php } else { ?>
         <div class="col-lg-12">
             <div class="row">
@@ -35,7 +35,7 @@
                                 <tr>
                                     <th class="text-center no-sort"><input type="checkbox" id="checkall" name="checkall"/></th>
                                     <th class="">No</th>
-                                    <th class="text-center">Image</th>
+                                    <th class="text-center" style="width: 15%">Image</th>
                                     <th class="text-center">Diupload oleh</th>
                                     <th class="text-center">Tipe file</th>
                                     <th class="text-center">Ukuran file</th>
@@ -52,10 +52,10 @@
                                     <tr>
                                         <td class="text-center"><input type="checkbox" id="pcheck[]" name="pcheck[]" value="<?php echo $i['id'] ?>"/></td>
                                         <td class=""><?php echo $no ?></td>
-                                        <td class=""><a download="<?php echo $i['name']?>" href="<?php echo base_url().$i['dir'].$i['name']?>"><img class="img-thumbnail img-responsive" src="<?php echo base_url().$i['dir'].'thumbnail/'.$i['name'] ?>"></a></td>
+                                        <td class=""><a download="<?php echo $i['name'] ?>" href="<?php echo base_url() . $i['dir'] . $i['name'] ?>"><img class="img-thumbnail img-responsive" src="<?php echo base_url() . $i['dir'] . 'thumbnail/' . $i['name'] ?>"></a></td>
                                         <td class="text-center"><?php echo $i['first_name'] . " " . $i['last_name'] ?></td>
-                                        <td class="text-center"><?php echo $i['type']?></td>
-                                        <td class="text-center"><?php echo $i['size']?></td>
+                                        <td class="text-center"><?php echo $i['type'] ?></td>
+                                        <td class="text-center"><?php echo $i['size'] ?></td>
                                         <td class="text-center"><?php echo date('d-m-Y H:i', strtotime($i['modified'])) ?></td>
                                         <td class="text-center">
                                             <a href="<?php echo site_url('manage/media/image/edit/' . $i['id']) ?>" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-edit text-primary"></i></a>
@@ -67,14 +67,15 @@
                                 }
                                 ?>
                             </tbody>
-                        </table>
+                        </table><br>
                     </div>
                 </div>
             </div>
         </div>
-    <?php }
+        <?php
+    }
+    echo form_close()
     ?>
-    <?php echo form_close() ?>
     <div class="clearfix"></div> 
 </div>
 <div id="delete-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">

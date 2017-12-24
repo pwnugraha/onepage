@@ -7,59 +7,59 @@
             </div>
         <?php } ?>
         <div class="col-lg-12">
-            <h2 class="page-header"><i class="fa fa-fw fa-laptop"></i>Banner
+            <h2 class="page-header"><i class="fa fa-fw fa-image"></i>Partner
             </h2>
         </div><br>
     </div>
-    <?php echo form_open(site_url('manage/template/banner/delete_all'), 'id="delall"') ?>
+    <?php echo form_open(site_url('manage/other/partner/delete_all'), 'id="delall"') ?>
     <div class="col-lg-12">
-        <?php if ($banner) { ?>
+        <?php if ($image) { ?>
             <div class="float-left">
                 <button type="submit" class="btn btn-default" id="delete_all"><i class="fa fa-fw fa-trash"></i></button>
             </div>
         <?php } ?>
         <div class="text-right">
-            <a href="<?php echo site_url('manage/template/banner/upload') ?>" class="btn btn-primary"><i class="fa fa-fw fa-upload"></i>&nbsp;Upload</a>
+            <a href="<?php echo site_url('manage/other/partner/upload') ?>" class="btn btn-primary"><i class="fa fa-fw fa-upload"></i>&nbsp;Upload</a>
         </div>
     </div><br>
-    <?php if ($banner == FALSE) { ?>
+    <?php if ($image == FALSE) { ?>
         <br>
-        <h4 class="text-center">Data Banner kosong. Klik 'Upload' untuk menambahkan banner.</h4>
+        <h4 class="text-center">Data Partner kosong. Klik 'Upload' untuk menambahkan Partner</h4>
     <?php } else { ?>
         <div class="col-lg-12">
             <div class="row">
                 <div class = "col-xs-12 col-sm-12">
                     <div class="table-responsive">
-                        <table class="table table-hover table-responsive" id="dtable">
+                        <table class="table table-hover" id="dtable">
                             <thead>
                                 <tr>
                                     <th class="text-center no-sort"><input type="checkbox" id="checkall" name="checkall"/></th>
                                     <th class="">No</th>
-                                    <th class="text-center" style="width: 15%">Banner</th>
-                                    <th class="text-center">Tampilkan</th>
-                                    <th class="text-center">Tampil di halaman</th>
-                                    <th class="text-center">Bagian</th>
-                                    <th class="text-center">Urutan</th>
-                                    <th class="text-center" style="width: 10%"><i class="fa fa-cogs"></i></th>
+                                    <th class="text-center" style="width: 15%">Logo Partner</th>
+                                    <th class="text-center">Diupload oleh</th>
+                                    <th class="text-center">Tipe file</th>
+                                    <th class="text-center">Ukuran file</th>
+                                    <th class="text-center">Diperbarui</th>
+                                    <th class="text-center no-sort"><i class="fa fa-cogs"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 $no = 1;
-                                foreach ($banner as $i) {
+                                foreach ($image as $i) {
                                     ?>
 
                                     <tr>
                                         <td class="text-center"><input type="checkbox" id="pcheck[]" name="pcheck[]" value="<?php echo $i['id'] ?>"/></td>
                                         <td class=""><?php echo $no ?></td>
-                                        <td class=""><img class="img-responsive" src="<?php echo base_url() . $i['dir'] . 'thumbnail/' . $i['name'] ?>"></td>
-                                        <td class="text-center"><?php echo (($i['autoload'] == "yes") ? '<i class="fa fa-check"></i>' : '<i class="fa fa-close"></i>') ?></td>
-                                        <td class="text-center"><?php echo $i['page'] ?></td>
-                                        <td class="text-center"><?php echo $i['section'] ?></td>
-                                        <td class="text-center"><?php echo $i['sort'] ?></td>
+                                        <td class=""><a download="<?php echo $i['name'] ?>" href="<?php echo base_url() . $i['dir'] . $i['name'] ?>"><img class="img-thumbnail img-responsive" src="<?php echo base_url() . $i['dir'] . 'thumbnail/' . $i['name'] ?>"></a></td>
+                                        <td class="text-center"><?php echo $i['first_name'] . " " . $i['last_name'] ?></td>
+                                        <td class="text-center"><?php echo $i['type'] ?></td>
+                                        <td class="text-center"><?php echo $i['size'] ?></td>
+                                        <td class="text-center"><?php echo date('d-m-Y H:i', strtotime($i['modified'])) ?></td>
                                         <td class="text-center">
-                                            <a href="<?php echo site_url('manage/template/banner/edit/' . $i['id']) ?>" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-edit text-primary"></i></a>
-                                            <button id="delete" type="button" class="btn btn-default btn-sm" data-url="<?php echo site_url('manage/template/banner/delete/' . $i['id']) ?>" data-toggle="modal" data-target="#delete-modal" data-backdrop="static" data-keyboard="false" title="Hapus"><i class="fa fa-close text-danger"></i></button>
+                                            <a href="<?php echo site_url('manage/other/partner/edit/' . $i['id']) ?>" class="btn btn-default btn-sm" title="Edit"><i class="fa fa-edit text-primary"></i></a>
+                                            <button id="delete" type="button" class="btn btn-default btn-sm" data-url="<?php echo site_url('manage/other/partner/delete/' . $i['id']) ?>" data-toggle="modal" data-target="#delete-modal" data-backdrop="static" data-keyboard="false" title="Hapus"><i class="fa fa-close text-danger"></i></button>
                                         </td>
                                     </tr>
                                     <?php
@@ -83,7 +83,7 @@
         <div class="modal-content modal-confirm">
             <div class="modal-body text-center text-semi-bold">
                 <p><i class="fa fa-info-circle text-warning fa-2x"></i></p>
-                <p>Banner ini akan dihapus. Lanjutkan ?</p>
+                <p>Partner ini akan dihapus. Lanjutkan ?</p>
                 <div class="text-center">
                     <a href="#" class="btn btn-primary btn-sm" id="btn-modal-delete">Ya</a>
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Tidak</button>           

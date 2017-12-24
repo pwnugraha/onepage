@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo site_url('kelola') ?>">onePage</a>
+                    <a class="navbar-brand" href="#">onePage</a>
                     <div class="navbar-fa-right">
                         <ul class="nav navbar-top-links navbar-right">
                             <!-- /.dropdown -->
@@ -146,6 +146,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                     class="active"<?php } ?> href="<?php echo site_url('manage/template/banner') ?>">Banner</a></li>
                                         <li><a <?php if ($this->uri->segment(3) == 'homepage') { ?>
                                                     class="active"<?php } ?> href="<?php echo site_url('manage/template/homepage') ?>">Homepage</a></li>
+                                        <li><a <?php if ($this->uri->segment(3) == 'media_tag' && $this->uri->segment(5) == 'image') { ?>
+                                                    class="active"<?php } ?> href="<?php echo site_url('manage/template/media_tag/show/image') ?>">Image Tag</a></li>
+                                        <li><a <?php if ($this->uri->segment(3) == 'media_tag' && $this->uri->segment(5) == 'video') { ?>
+                                                    class="active"<?php } ?> href="<?php echo site_url('manage/template/media_tag/show/video') ?>">Video Tag</a></li>
                                     </ul>
                                 </li>
                                 <li <?php if ($this->uri->segment(2) == 'config') { ?>

@@ -63,7 +63,7 @@ class Ion_auth {
     public function __construct() {
         $this->load->add_package_path(APPPATH . 'third_party/phpmailer'); //*
         $this->config->load('ion_auth', TRUE);
-        $this->load->library(array('email', 'pmail')); //*
+        $this->load->library(array('email', 'pmail'));//op
         $this->lang->load('ion_auth');
         $this->load->helper(array('cookie', 'language', 'url'));
 
@@ -142,7 +142,7 @@ class Ion_auth {
                 );
 
                 if (!$this->config->item('use_ci_email', 'ion_auth')) {
-                    $this->set_message('forgot_password_successful');
+                    $this->set_message('forgot_password_successful');// op add phpmailer below
                     $params = array(
                         'message' => $this->load->view($this->config->item('email_templates', 'ion_auth') . $this->config->item('email_forgot_password', 'ion_auth'), $data, TRUE),
                         'from_email' => $this->config->item('admin_email', 'ion_auth'),
@@ -151,7 +151,7 @@ class Ion_auth {
                         'subject' => $this->config->item('site_title', 'ion_auth') . ' - ' . $this->lang->line('email_forgotten_password_subject'),
                     );
                     return $this->pmail->sendmail($params);
-                    //return $data;//*
+                    //return $data;//op add phpmailer above
                 } else {
                     $message = $this->load->view($this->config->item('email_templates', 'ion_auth') . $this->config->item('email_forgot_password', 'ion_auth'), $data, TRUE);
                     $this->email->clear();
@@ -277,7 +277,7 @@ class Ion_auth {
      *                        if the operation failed.
      * @author Mathew
      */
-    public function register($identity, $password, $email, $additional_data = array(), $group_ids = array()) { //need to test email activation
+    public function register($identity, $password, $email, $additional_data = array(), $group_ids = array()) {
         $this->ion_auth_model->trigger_events('pre_account_creation');
 
         $email_activation = $this->config->item('email_activation', 'ion_auth');
@@ -325,7 +325,7 @@ class Ion_auth {
             );
             if (!$this->config->item('use_ci_email', 'ion_auth')) {
                 $this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful', 'activation_email_successful'));
-                $this->set_message('activation_email_successful');
+                $this->set_message('activation_email_successful');//op add php mailer below
                 $params = array(
                     'message' => $this->load->view($this->config->item('email_templates', 'ion_auth') . $this->config->item('email_activate', 'ion_auth'), $data, TRUE),
                     'from_email' => $this->config->item('admin_email', 'ion_auth'),
@@ -333,7 +333,7 @@ class Ion_auth {
                     'to' => $email,
                     'subject' => $this->config->item('site_title', 'ion_auth') . ' - ' . $this->lang->line('email_activation_subject'),
                 );
-                $this->pmail->sendmail($params);
+                $this->pmail->sendmail($params);//op add phapmailer above
                 return $data;
             } else {
                 $message = $this->load->view($this->config->item('email_templates', 'ion_auth') . $this->config->item('email_activate', 'ion_auth'), $data, true);
@@ -344,7 +344,7 @@ class Ion_auth {
                 $this->email->subject($this->config->item('site_title', 'ion_auth') . ' - ' . $this->lang->line('email_activation_subject'));
                 $this->email->message($message);
 
-                if ($this->email->send() == TRUE) {
+                if ($this->email->send() === TRUE) {
                     $this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful', 'activation_email_successful'));
                     $this->set_message('activation_email_successful');
                     return $id;

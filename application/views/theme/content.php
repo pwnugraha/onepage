@@ -7,14 +7,23 @@
                 <h1 class="mbr-section-title align-center py-2 mbr-bold mbr-fonts-style display-1">
                     <?php echo ucwords($post['title']) ?>
                 </h1>
-                <div class="text-justify">
-                    <?php echo $post['description'] ?>
-                </div>
                 <a class="article btn btn-white-outline" href="<?php echo site_url('article') ?>">
-                    <p>Kembali ke daftar artikel</p></a>
+                    <p>&nbsp;Kembali ke daftar artikel&nbsp;</p></a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- artikel -->
+<section class="content-article" >
+    <div class="container" >
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="thumbnail">
+                    <div class="text-justify">
+                        <?php echo $post['description'] ?>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</section>

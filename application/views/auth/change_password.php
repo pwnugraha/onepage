@@ -6,9 +6,6 @@
             </h2>
         </div><br>
         <div class="col-sm-12">
-
-            <div id="infoMessage"><?php echo $message; ?></div>
-
             <?php echo form_open("auth/change_password", 'class="form-horizontal"'); ?>
             <div class="form-group">
                 <label class="col-sm-2 control-label text-align-left">Password Lama</label>

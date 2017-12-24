@@ -35,7 +35,7 @@
                                 <tr>
                                     <th class="text-center no-sort"><input type="checkbox" id="checkall" name="checkall"/></th>
                                     <th class="">No</th>
-                                    <th class="text-center">Halaman</th>
+                                    <th class="text-center">Judul</th>
                                     <th class="text-center">Author</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Diperbarui</th>

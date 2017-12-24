@@ -20,9 +20,13 @@ class Welcome extends AppBaseSite {
         $data['banner_section_2'] = $this->base_model->get_join_item('result', 'media.name, dir', 'sort ASC', 'banners', 'media', 'banners.media_id = media.id', 'inner', array('section' => 2, 'autoload' => 'yes'));
 
         //for genpi
-        //$data['image'] = $this->base_model->get_item('result', 'media', NULL, array('media_type' => 'image'));
-        $this->siteview('theme/landing', $data);
-        //$this->load->view('theme/genpi/index', $data);
+        $data['articles'] = $this->base_model->get_join_item('result', 'posts.*, media.title as media_title, media.alt_text, media.dir, media.name, media.caption', 'posts.id DESC', 'posts', 'media', 'posts.image=media.id', 'left', array('post_type' => 'article','publish'=>'yes'), 5);
+        $data['event'] = $this->base_model->get_join_item('row', 'posts.*, media.title as media_title, media.alt_text, media.dir, media.name, media.caption', 'posts.id DESC', 'posts', 'media', 'posts.image=media.id', 'left', array('post_type' => 'event','publish'=>'yes'), 1);
+        $data['video'] = $this->base_model->get_item('row', 'media', 'description', array('media_type' => 'video'), 'media.id DESC', 1);
+        $data['image'] = $this->base_model->get_item('result', 'media', NULL, array('media_type' => 'image', 'dir'=>'media/image/'));
+        $data['partners'] = $this->base_model->get_item('result', 'media', NULL, array('media_type' => 'image', 'dir'=>'media/partner/'));
+        //$this->siteview('theme/landing', $data);
+        $this->siteview('theme/genpi/index', $data);
     }
 
 }

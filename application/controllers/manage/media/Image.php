@@ -11,9 +11,11 @@ class Image extends AppBase {
     }
 
     public function index() {
-        $data['image'] = $this->base_model->get_join_item('result', 'media.*, first_name, last_name', 'media.id DESC', 'media', 'users', 'media.user_id=users.id', 'left', array('media_type' => 'image', 'dir' =>'media/image/'));
-        foreach ($data['image'] as &$v) {
-            $v['size'] = $this->_getFileSize($v['size']);
+        $data['image'] = $this->base_model->get_join_item('result', 'media.*, first_name, last_name', 'media.id DESC', 'media', 'users', 'media.user_id=users.id', 'left', array('media_type' => 'image', 'dir' => 'media/image/'));
+        if (!empty($data['image'])) {
+            foreach ($data['image'] as &$v) {
+                $v['size'] = $this->_getFileSize($v['size']);
+            }
         }
         $this->admindisplay('manage/media/image/index', $data);
     }
@@ -107,7 +109,7 @@ class Image extends AppBase {
         }
         redirect('manage/media/image');
     }
-    
+
     public function delete_all() {
         $data = $this->input->post('pcheck');
         if (!empty($data)) {
