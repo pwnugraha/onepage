@@ -14,17 +14,15 @@ class Brand extends AppBase {
     public function index() {
         $data['brand'] = $this->base_model->get_join_item('row', 'media.id, value, autoload, media.name, dir, title, description', NULL, 'settings', 'media', 'settings.value = media.id', 'inner');
         
-        $this->form_validation->set_rules('title', 'Nama Logo', 'trim|required');
+        $this->form_validation->set_rules('autoload', 'Tampilkan', 'trim|required');
 
         if ($this->form_validation->run() === FALSE) {
             $this->admindisplay('manage/template/brand/index', $data);
         } else {
             $params = array(
-                'title' => $this->input->post('title', TRUE),
-                'description' => $this->input->post('description', TRUE),
-                'modified' => date("Y-m-d H:i:s"),
+                'autoload' => $this->input->post('autoload', TRUE),
             );
-            $act = $this->base_model->update_item('media', $params, array('id' => $data['brand']['id']));
+            $act = $this->base_model->update_item('settings', $params, array('name' => 'site_logo'));            
             if (!$act) {
                 $this->_result_msg('danger', 'Gagal menyimpan data');
             } else {

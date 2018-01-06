@@ -40,15 +40,14 @@
     </div>
     <?php if ($brand): ?>
         <div class="form-group">
-            <label class="col-sm-2 control-label text-align-left">Nama Logo</label>
+            <label class="col-sm-2 control-label text-align-left">Tampilkan Logo</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="title" value="<?php echo $brand['title'] ?>">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label text-align-left">Deskripsi (optional)</label>
-            <div class="col-sm-6">
-                <textarea class="form-control" name="description" rows="5"><?php echo $brand['description'] ?></textarea>
+                <label class="radio-inline">
+                    <input type="radio" name="autoload" value="yes" <?php echo ($brand['autoload'] == 'yes') ? 'checked' : '' ?>>Ya
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="autoload" value="no" <?php echo ($brand['autoload'] == 'no') ? 'checked' : '' ?>>Tidak
+                </label>
             </div>
         </div>
         <div class="form-group">

@@ -11,17 +11,9 @@ class AppBase extends CI_Controller {
         $this->load->add_package_path(APPPATH . 'third_party/ion_auth/');
         $this->load->library(array('ion_auth', 'form_validation'));
         $this->load->model('base_model');
+        $this->config->load('build_opt', TRUE);
         $this->_is_logged_in();
-        $this->build_opt = array(
-            'banner_page' => array('home' => 2),
-            'built_in_page' => array('home','article'),
-            'max_banner' => 5,
-            'homepage_background_template' => 3,
-            'homepage_editable_content' => 5,
-            'homepage_content_title' => 5,
-            'homepage_video' => 1,
-            
-        );
+        $this->build_opt = $this->config->item('build_opt');
         
         
     }

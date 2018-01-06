@@ -1,4 +1,3 @@
-
 <section class="engine"><a href="#">how to create a website for free</a></section>
 <section class="mbr-section mbr-section-hero mbr-section-full mbr-parallax-background mbr-after-navbar" id="header1-0" data-rv-view="2" <?php echo (isset($theme[0]['dir']) && isset($theme[0]['name'])) ? 'style="background-image: url(' . base_url() . $theme[0]['dir'] . $theme[0]['name'] . ')"' : '' ?>>
     <div class="mbr-table-cell">

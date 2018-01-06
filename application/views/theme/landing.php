@@ -53,15 +53,21 @@
                     <h3 class="mbr-section-subtitle align-center mbr-light mbr-white pb-3 mbr-fonts-style display-5" style="color: #333;"><?php echo (isset($theme_contents[1]['value'])) ? $theme_contents[1]['value'] : ''; ?></h3>
                     <div class="mbr-slider slide carousel" data-pause="true" data-keyboard="false" data-ride="carousel" data-interval="4000">
                         <div class="carousel-inner" role="listbox">
-                            <?php foreach ($banner_section_1 as $k => $v) { ?>
-                                <div class="carousel-item slider-fullscreen-image <?php echo $k == 0 ? "active" : ""; ?>" data-bg-video-slide="false">
-                                    <div class="container container-slide">
-                                        <div class="image_wrapper">
-                                            <img src="<?php echo base_url() . $v['dir'] . $v['name'] ?>">
+                            <?php
+                            if (!empty($banner_section_1)) {
+                                foreach ($banner_section_1 as $k => $v) {
+                                    ?>
+                                    <div class="carousel-item slider-fullscreen-image <?php echo $k == 0 ? "active" : ""; ?>" data-bg-video-slide="false">
+                                        <div class="container container-slide">
+                                            <div class="image_wrapper">
+                                                <img src="<?php echo base_url() . $v['dir'] . $v['name'] ?>">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php } ?>
+                                    <?php
+                                }
+                            }
+                            ?>
                         </div>
                         <a data-app-prevent-settings="" class="carousel-control carousel-control-prev" role="button" data-slide="prev" href="#slider2-12">
                             <span aria-hidden="true" class="mbri-left mbr-iconfont"></span>
@@ -79,40 +85,39 @@
 </section>
 
 <!-- carousel 2-->
-<section class="carousel slide cid-qCx6EeDfhl" data-interval="false" id="slider2-15" data-rv-view="1109">
-    <div class="container content-slider">
-        <div class="content-slider-wrap">
-            <div class="media-container-row">
-                <div class="title col-12 col-md-8">
-                    <h2 class="align-center mbr-bold pb-3 mbr-fonts-style display-2"><?php echo (isset($theme_contents_title[2]['value'])) ? $theme_contents_title[2]['value'] : ''; ?></h2>
-                    <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5"><?php echo (isset($theme_contents[2]['value'])) ? $theme_contents[2]['value'] : ''; ?></h3>
-
-                    <div class="mbr-slider slide carousel" data-pause="true" data-keyboard="false" data-ride="carousel" data-interval="4000">
-                        <div class="carousel-inner" role="listbox">
-                            <?php foreach ($banner_section_2 as $k => $v) { ?>
-                                <div class="carousel-item slider-fullscreen-image <?php echo $k == 0 ? "active" : ""; ?>" data-bg-video-slide="false">
-                                    <div class="container container-slide">
-                                        <div class="image_wrapper">
-                                            <img src="<?php echo base_url() . $v['dir'] . $v['name'] ?>">
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php } ?>
-                        </div>
-                        <a data-app-prevent-settings="" class="carousel-control carousel-control-prev" role="button" data-slide="prev" href="#slider2-15">
-                            <span aria-hidden="true" class="mbri-left mbr-iconfont"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a data-app-prevent-settings="" class="carousel-control carousel-control-next" role="button" data-slide="next" href="#slider2-15">
-                            <span aria-hidden="true" class="mbri-right mbr-iconfont"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+<article id="personalizacja" class="section section-3">
+    <div class="bg-container js--bg-personalizacja">
+        <?php
+        if (!empty($banner_section_2)) {
+            foreach ($banner_section_2 as $k => $v) {
+                ?>
+                <div class="bg-personalizacja <?php echo $k == 0 ? "active" : ""; ?>" <?php echo 'style="background-image: url(' . base_url() . $v['dir'] . $v['name'] . '); background-position: center bottom;"'; ?>></div>
+                <?php
+            }
+        }
+        ?>
     </div>
-</section>
+    <div class="wrapper">
+        <h2 style="text-align: center;"><?php echo (isset($theme_contents_title[2]['value'])) ? $theme_contents_title[2]['value'] : ''; ?></h2>
+        <p style="text-align: center;"><?php echo (isset($theme_contents[2]['value'])) ? $theme_contents_title[2]['value'] : ''; ?></p>
+    </div>
+    <ul class="slider slider-personalizacja">
+        <?php
+        if (!empty($banner_section_2)) {
+            foreach ($banner_section_2 as $k => $v) {
+                ?>
+                <li class="text-center <?php echo $k == 0 ? "active" : ""; ?>">
+                    <div class="" style="max-width: 640px; margin: 0 auto">
+                        <img class="img-responsive" src="<?php echo base_url() . $v['dir'] . $v['name'] ?>" alt="tablet-personalization" />
+                    </div>
+                </li>
+                <?php
+            }
+        }
+        ?>
+    </ul>
+</article>
+
 <!-- -->
 <section class="mbr-section content5 cid-qCx2LPmB9O mbr-parallax-background" id="content5-14" data-rv-view="1121" <?php echo (isset($theme[1]['dir']) && isset($theme[1]['name'])) ? 'style="background-image: url(' . base_url() . $theme[1]['dir'] . $theme[1]['name'] . ')"' : '' ?>>
     <div class="mbr-overlay" style="opacity: 0.4; background-color: rgb(0, 0, 0);">

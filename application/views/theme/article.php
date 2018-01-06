@@ -2,19 +2,19 @@
     <div class="container" id="tourpackages-carousel">
 
         <div class="row"><?php
-            if (!empty($articles)) {
+            if (!empty($posts)) {
                 $ads = FALSE;
-                foreach ($articles as $key => $article) {
+                foreach ($posts as $key => $post) {
                     ?>
                     <div class="col-xs-18 col-sm-6 col-md-4">
                         <div class="thumbnail">
-                            <img src="<?php echo base_url() . $article['dir'] . 'thumbnail/' . $article['name'] ?>" alt="<?php echo $article['alt_text'] ?>" style="height: 250px">
+                            <img src="<?php echo base_url() . $post['dir'] . 'thumbnail/' . $post['name'] ?>" alt="<?php echo $post['alt_text'] ?>" style="height: 250px">
                             <div class="caption" style="height: 303px">
-                                <h4 style="height: 72px"><?php echo (strlen($article['title']) > 55) ? mb_substr(ucwords($article['title']), 0, 55) . '...' : $article['title'] ?></h4>
+                                <h4 style="height: 72px"><?php echo (strlen($post['title']) > 55) ? mb_substr(ucwords($post['title']), 0, 55) . '...' : $post['title'] ?></h4>
                                 <div style="height: 111px">
-                                    <?php echo (strlen($article['description']) > 120) ? mb_substr(ucwords($article['description']), 0, 120) . '...' : $article['description'] ?>
+                                    <?php echo (strlen($post['description']) > 120) ? mb_substr(ucwords($post['description']), 0, 120) . '...' : $post['description'] ?>
                                 </div>
-                                <p><a href="<?php echo site_url('article/read/' . $article['rel_url']) ?>" class="btn btn-info btn-xs" role="button">Button</a></p>
+                                <p><a href="<?php echo site_url($post['rel_url']) ?>" class="btn btn-info btn-xs" role="button">Button</a></p>
                             </div>
                         </div>
                     </div>

@@ -2,13 +2,15 @@
 <html >
     <head>
 
-        <title>Home</title>
+        <title><?php echo $sites['site_title'] ?></title>
 
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="generator" content="Mobirise v4.5.1, mobirise.com">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
         <meta name="description" content="">
+
+        <?php $this->load->view('meta/open_graph') ?>
 
         <link rel="stylesheet" href="<?php echo base_url('assets/laundry-in/') ?>assets/web/assets/mobirise-icons/mobirise-icons.css">
         <link rel="stylesheet" href="<?php echo base_url('assets/laundry-in/') ?>assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css">
@@ -22,9 +24,20 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/laundry-in/') ?>assets/theme/css/style.css">
         <link rel="stylesheet" href="<?php echo base_url('assets/laundry-in/') ?>assets/mobirise/css/mbr-additional.css" type="text/css">
         <link rel="stylesheet" href="<?php echo base_url('assets/laundry-in/') ?>assets/mobirise/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="<?php echo base_url('assets/laundry-in/') ?>assets/bxslider/impl.css" type="text/css">
 
     </head>
     <body id="page-top">
+        <div id="fb-root"></div>
+        <script>(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.11';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
 
         <!--Navigation-->
         <section class="menu cid-qBvtuOByMs" once="menu" id="menu1-e" data-rv-view="1092">
@@ -52,9 +65,15 @@
                         <li class="nav-item">
                             <a class="nav-link link text-white display-4" href="<?php echo site_url() ?>">Home</a></li>
                         <li class="nav-item"><a class="nav-link link text-white display-4" href="<?php echo site_url('article') ?>">Artikel</a></li>
-                        <?php foreach ($pages as $page) { ?>
-                            <li class="nav-item"><a class="nav-link link text-white display-4" href="<?php echo site_url('informasi/read/') . $page['rel_url'] ?>" class="text-white"><?php echo $page['title'] ?></a></li>
-                        <?php } ?>
+                        <?php
+                        if (!empty($pages)) {
+                            foreach ($pages as $page) {
+                                ?>
+                                <li class="nav-item"><a class="nav-link link text-white display-4" href="<?php echo site_url('informasi/read/' . $page['rel_url']) ?>" class="text-white"><?php echo $page['title'] ?></a></li>
+                                <?php
+                            }
+                        }
+                        ?>
                     </ul>
                 </div>
             </nav>
@@ -73,9 +92,15 @@
                         <p class="mb-3 mbr-fonts-style foot-title display-7">LAUNDRY-IN</p>
                         <p class="mbr-text mbr-fonts-style mbr-links-column display-7"><a href="<?php echo site_url() ?>" class="text-white">Home</a><br>
                             <a href="<?php echo site_url('article') ?>" class="text-white">Artikel</a>
-                            <?php foreach ($pages as $page) { ?>
-                                <br><a href="<?php echo site_url('informasi/read/') . $page['rel_url'] ?>" class="text-white"><?php echo $page['title'] ?></a>
-                            <?php } ?>
+                            <?php
+                            if (!empty($pages)) {
+                                foreach ($pages as $page) {
+                                    ?>
+                                    <br><a href="<?php echo site_url('informasi/read/' . $page['rel_url']) ?>" class="text-white"><?php echo $page['title'] ?></a>
+                                    <?php
+                                }
+                            }
+                            ?>
                     </div>
                     <div class="col-md-4 col-sm-8">
                         <p class="mb-4 foot-title mbr-fonts-style display-7">Artikel Terbaru</p>
@@ -139,6 +164,9 @@
         <script src="<?php echo base_url('assets/laundry-in/') ?>assets/theme/js/script.js"></script>
         <script src="<?php echo base_url('assets/laundry-in/') ?>assets/slidervideo/script.js"></script>
         <script src="<?php echo base_url('assets/laundry-in/') ?>assets/formoid/formoid.min.js"></script>
+        <script src="<?php echo base_url('assets/laundry-in/') ?>assets/formoid/formoid.min.js"></script>
+        <script src="<?php echo base_url('assets/laundry-in/') ?>assets/bxslider/jquery.bxslider.min.js"></script>
+        <script src="<?php echo base_url('assets/laundry-in/') ?>assets/bxslider/impl.js"></script>
 
     </body>
 </html>

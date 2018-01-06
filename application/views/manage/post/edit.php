@@ -54,7 +54,7 @@
                         <div class="panel-heading"><i class="fa fa-fw fa-link"></i><strong>Link</strong></div>
                         <div class="panel-body">
                             <div class="input-group">
-                                <span class="input-group-addon">laundry-in.com/<?php echo ($post_type != 'page') ? $uri : ''; ?>/</span>
+                                <span class="input-group-addon"><?php echo site_url(); ?></span>
                                 <input type="text" class="form-control" id="rel_url" name="rel_url" value="<?php echo $post['rel_url'] ?>">
                             </div>
                         </div>

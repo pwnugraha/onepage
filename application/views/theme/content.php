@@ -19,6 +19,11 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12">
                 <div class="thumbnail">
+                    <div class="fb-share-button" data-href="http://localhost.com/onepage/dawd-3" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+                        <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost.com/onepage/dawd-3&amp;src=sdkpreparse">
+                            Bagikan
+                        </a>
+                    </div>
                     <div class="text-justify">
                         <?php echo $post['description'] ?>
                     </div>

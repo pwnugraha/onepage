@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
         <meta name="description" content="">
 
-        <title>Genpi</title>
+        <title><?php echo $sites['site_title'] ?></title>
 
         <link rel="stylesheet" href="<?php echo base_url('assets/genpi/') ?>assets/et-line-font-plugin/style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
@@ -26,12 +26,20 @@
     </head>
     <body>
         <section id="menu-a" data-rv-view="19">
-            <nav class="navbar navbar-dropdown transparent navbar-fixed-top bg-color" style="<?php echo ($this->uri->segment(1) == NULL || $this->uri->segment(2)) ? '' : 'background: #2969b0 !important;' ?>">
+            <nav class="navbar navbar-dropdown transparent navbar-fixed-top bg-color" style="<?php echo (!in_array($this->uri->segment(1), array('article'))) ? '' : 'background: #2969b0 !important;' ?>">
                 <div class="container">
                     <div class="mbr-table">
                         <div class="mbr-table-cell">
                             <div class="navbar-brand">
-                                <a class="navbar-caption" href="<?php echo site_url() ?>">GENPI</a>
+                                <?php if (!$brand || $brand['autoload']!='yes') { ?>
+                                    <a class="navbar-caption" href="<?php echo site_url() ?>"><?php echo $sites['site_title'] ?></a>
+                                <?php } else { ?>
+                                    <span class="navbar-logo">
+                                        <a href="<?php echo site_url() ?>">
+                                            <img src="<?php echo base_url() . $brand['dir'] . '' . $brand['name'] ?>" alt="><?php echo $sites['site_title'] ?>" media-simple="true" style="height: 3.0rem;">
+                                        </a>
+                                    </span>
+                                <?php } ?>
                             </div>
                         </div>
                         <div class="mbr-table-cell">
@@ -43,10 +51,10 @@
                                     <a class="nav-link link" href="#">OVERVIEW</a>
                                 </li>
                                 <li class="nav-item"><a class="nav-link link" href="<?php echo site_url('article') ?>">Artikel</a></li>
-                                <li class="nav-item"><a class="nav-link link" href="<?php echo site_url('demo/image') ?>">Image</a></li>
-                                <li class="nav-item"><a class="nav-link link" href="<?php echo site_url('demo/video') ?>">Video</a></li>
+                                <li class="nav-item"><a class="nav-link link" href="<?php echo site_url('image') ?>">Image</a></li>
+                                <li class="nav-item"><a class="nav-link link" href="<?php echo site_url('video') ?>">Video</a></li>
                                 <?php foreach ($pages as $page) { ?>
-                                    <li class="nav-item"><a class="nav-link link" href="<?php echo site_url('informasi/read/') . $page['rel_url'] ?>" class="text-white"><?php echo $page['title'] ?></a></li>
+                                    <li class="nav-item"><a class="nav-link link" href="<?php echo site_url($page['rel_url']) ?>" class="text-white"><?php echo $page['title'] ?></a></li>
                                 <?php } ?>
                             </ul>
                             <button hidden="" class="navbar-toggler navbar-close" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
@@ -57,7 +65,7 @@
                 </div>
             </nav>
         </section>
-        <?php $this->load->view($child_template)?>
+        <?php $this->load->view($child_template) ?>
 
         <footer class="mbr-small-footer mbr-section mbr-section-nopadding" id="footer1-g" data-rv-view="36" style="background-color: rgb(41, 105, 176); padding-top: 1.75rem; padding-bottom: 1.75rem;">
 

@@ -53,16 +53,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </ul>
                                 <!-- /.dropdown-user -->
                             </li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding-left: 10px; padding-right: 10px">
-                                    <i class="fa fa-users fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="<?php echo site_url('auth') ?>"><i class="fa fa-users fa-fw"></i> Kelola Pengguna</a>
-                                    </li>
-                                </ul>
-                                <!-- /.dropdown-user -->
-                            </li>
+                            <?php if ($this->ion_auth->is_admin()) { ?>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding-left: 10px; padding-right: 10px">
+                                        <i class="fa fa-users fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user">
+                                        <li><a href="<?php echo site_url('auth') ?>"><i class="fa fa-users fa-fw"></i> Kelola Pengguna</a>
+                                        </li>
+                                    </ul>
+                                    <!-- /.dropdown-user -->
+                                </li>
+                            <?php } ?>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="padding-left: 10px; padding-right: 10px">
                                     <i class="fa fa-user fa-fw"></i><?php echo $this->ion_auth->user()->row()->username ?><label class="label-user"></label>&nbsp;<i class="fa fa-caret-down"></i>

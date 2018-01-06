@@ -2,19 +2,19 @@
     <div class="container" id="tourpackages-carousel">
 
         <div class="row"><?php
-            if (!empty($articles)) {
+            if (!empty($posts)) {
                 $ads = FALSE;
-                foreach ($articles as $key => $article) {
+                foreach ($posts as $key => $post) {
                     ?>
                     <div class="col-xs-18 col-sm-6 col-md-4">
                         <div class="thumbnail">
-                            <img src="<?php echo base_url() . $article['dir'] . 'thumbnail/' . $article['name'] ?>" alt="<?php echo $article['alt_text'] ?>" style="height: 250px">
+                            <img src="<?php echo base_url() . $post['dir'] . 'thumbnail/' . $post['name'] ?>" alt="<?php echo $post['alt_text'] ?>" style="height: 250px">
                             <div class="caption" style="height: 300px; background-color: #ffffff">
-                                <h4 style="height: 70px; margin: 5px 0px 25px; text-align: center; line-height: 1.25em"><?php echo (strlen($article['title']) > 55) ? mb_substr(ucwords($article['title']), 0, 55) . '...' : $article['title'] ?></h4>
+                                <h4 style="height: 70px; margin: 5px 0px 25px; text-align: center; line-height: 1.25em"><?php echo (strlen($post['title']) > 55) ? mb_substr(ucwords($post['title']), 0, 55) . '...' : $post['title'] ?></h4>
                                 <div style="height: 105px; padding: 20px 5px 0px; margin-bottom: 20px; text-align: center">
-                                    <?php echo (strlen($article['description']) > 120) ? mb_substr(ucwords($article['description']), 0, 120) . '...' : $article['description'] ?>
+                                    <?php echo (strlen($post['description']) > 120) ? mb_substr(ucwords($post['description']), 0, 120) . '...' : $post['description'] ?>
                                 </div>
-                                <p style="text-align: center"><a href="<?php echo site_url('article/read/' . $article['rel_url']) ?>" class="btn btn-info btn-xs text-center" role="button">Button</a></p>
+                                <p style="text-align: center"><a href="<?php echo site_url($post['rel_url']) ?>" class="btn btn-info btn-xs text-center" role="button">Button</a></p>
                             </div>
                         </div>
                     </div>
