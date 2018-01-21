@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html >
     <head>
-        <!-- Site made with Mobirise Website Builder v4.5.1,  -->
+        <title><?php echo $sites['site_title'] ?></title>
+
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="generator" content="Mobirise v4.5.1, mobirise.com">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-        <meta name="description" content="">
+        <meta name="description" content="<?php echo $sites['site_description'] ?>">
 
-        <title><?php echo $sites['site_title'] ?></title>
+        <?php $this->load->view('meta/open_graph') ?>
 
         <link rel="stylesheet" href="<?php echo base_url('assets/genpi/') ?>assets/et-line-font-plugin/style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
@@ -25,6 +26,16 @@
 
     </head>
     <body>
+         <div id="fb-root"></div>
+        <script>(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
         <section id="menu-a" data-rv-view="19">
             <nav class="navbar navbar-dropdown transparent navbar-fixed-top bg-color" style="<?php echo (!in_array($this->uri->segment(1), array('article'))) ? '' : 'background: #2969b0 !important;' ?>">
                 <div class="container">

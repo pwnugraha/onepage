@@ -34,14 +34,15 @@ class General extends AppBase {
         }
         $data['msg'] = "";
         if ($this->input->post('p_setting')) {
-            $this->form_validation->set_rules('site_title', 'Title', 'trim|required');
-            $this->form_validation->set_rules('tagline', 'Tagline', 'trim|required');
-            $this->form_validation->set_rules('site_keyword', 'Keyword', 'trim|required');
-            $this->form_validation->set_rules('site_description', 'Deskripsi Website', 'trim|required');
-            $this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
-            $this->form_validation->set_rules('phone', 'Telepon', 'trim|required|numeric');
-            $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-            $this->form_validation->set_rules('whatsapp', 'Whatsapp', 'trim|required|numeric');
+            $this->form_validation->set_rules('site_name', 'Nama Situs', 'trim|required');
+            $this->form_validation->set_rules('site_title', 'Judul Situs', 'trim|required');
+            $this->form_validation->set_rules('tagline', 'Tagline', 'trim');
+            $this->form_validation->set_rules('site_keyword', 'Kata kunci', 'trim');
+            $this->form_validation->set_rules('site_description', 'Deskripsi Situs', 'trim');
+            $this->form_validation->set_rules('alamat', 'Alamat', 'trim');
+            $this->form_validation->set_rules('phone', 'Telepon', 'trim|numeric');
+            $this->form_validation->set_rules('email', 'Email', 'trim|valid_email');
+            $this->form_validation->set_rules('whatsapp', 'Whatsapp', 'trim|numeric');
             $this->form_validation->set_rules('facebook', 'Facebook', 'trim');
             $this->form_validation->set_rules('twitter', 'Twitter', 'trim');
             $this->form_validation->set_rules('instagram', 'Instagram', 'trim');
@@ -50,6 +51,7 @@ class General extends AppBase {
                 $this->admindisplay('manage/config/setting_general', $data);
             } else {
                 $params = array(
+                    'site_name' => $this->input->post('site_name', TRUE),
                     'site_title' => $this->input->post('site_title', TRUE),
                     'tagline' => $this->input->post('tagline', TRUE),
                     'site_keyword' => $this->input->post('site_keyword', TRUE),

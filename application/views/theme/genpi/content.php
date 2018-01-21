@@ -17,12 +17,30 @@
 <section class="content-article" style="padding-top: 50px; padding-bottom: 50px; background-color: #ffffff; word-wrap: break-word">
     <div class="container" >
         <div class="row">
-            <div class="col-xs-12 col-sm-12">
+            <div class="col-xs-12 col-sm-11">
+
                 <div class="thumbnail">
                     <div class="text-justify">
                         <?php echo $post['description'] ?>
                     </div>
                 </div> 
+            </div>
+            <div class="col-sm-1" id="share-on">
+                <div class="col-sm-12" style="padding-bottom: 5px">
+                    <div class="fb-share-button" data-href="<?php echo current_url() ?>" data-layout="box_count" data-size="small" data-mobile-iframe="true">
+                        <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(current_url()) ?>&amp;src=sdkpreparse">
+                            Bagikan
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=<?php echo urlencode(ucwords($post['title'])) ?>&url=<?php echo urlencode(current_url()) ?>">Tweet</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+                <div class="col-sm-12">
+                    <div class="g-plus" data-action="share" data-href="<?php echo urlencode(current_url()) ?>"></div>
+                    <script src="https://apis.google.com/js/platform.js" async defer></script>
+                </div>
             </div>
         </div>
     </div>

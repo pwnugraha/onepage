@@ -8,7 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="generator" content="Mobirise v4.5.1, mobirise.com">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-        <meta name="description" content="">
+        <meta name="description" content="<?php echo $sites['site_description'] ?>">
 
         <?php $this->load->view('meta/open_graph') ?>
 
@@ -26,6 +26,12 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/laundry-in/') ?>assets/mobirise/css/font-awesome.min.css" type="text/css">
         <link rel="stylesheet" href="<?php echo base_url('assets/laundry-in/') ?>assets/bxslider/impl.css" type="text/css">
 
+        <style type="text/css">
+            .sticky {
+                top: 600px;
+                position: fixed;
+            }
+        </style>
     </head>
     <body id="page-top">
         <div id="fb-root"></div>
@@ -35,7 +41,7 @@
                     return;
                 js = d.createElement(s);
                 js.id = id;
-                js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.11';
+                js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));</script>
 
@@ -52,12 +58,15 @@
                 </button>
                 <div class="menu-logo">
                     <div class="navbar-brand">
-                        <span class="navbar-logo">
-                            <a href="<?php echo site_url() ?>">
-                                <img src="<?php echo base_url() . $brand['dir'] . '' . $brand['name'] ?>" alt="Laundry" media-simple="true" style="height: 4.5rem;">
-                            </a>
-                        </span>
-                        <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="#">Laundry-in</a></span>
+                        <?php if ($brand) { ?>
+                            <span class="navbar-logo">
+                                <a href="<?php echo site_url() ?>">
+                                    <img src="<?php echo base_url() . $brand['dir'] . '' . $brand['name'] ?>" alt="Laundry" media-simple="true" style="height: 4.5rem;">
+                                </a>
+                            </span>
+                        <?php } else { ?>
+                            <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="#"><?php echo $sites['site_name'] ?></a></span>
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -167,6 +176,18 @@
         <script src="<?php echo base_url('assets/laundry-in/') ?>assets/formoid/formoid.min.js"></script>
         <script src="<?php echo base_url('assets/laundry-in/') ?>assets/bxslider/jquery.bxslider.min.js"></script>
         <script src="<?php echo base_url('assets/laundry-in/') ?>assets/bxslider/impl.js"></script>
+
+<!--        <script>
+
+            $(window).on('scroll', function () {
+                console.log($(window).scrollTop());
+                if ($(window).scrollTop() >= $("#share-on").offset().top) {
+                   // $("#share-on").addClass("sticky");
+                } else {
+                  //  $("#share-on").removeClass("sticky");
+                }
+            });
+        </script>-->
 
     </body>
 </html>

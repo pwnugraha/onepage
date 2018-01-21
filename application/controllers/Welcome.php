@@ -70,9 +70,9 @@ class Welcome extends AppBaseSite {
 
         $data['posts'] = $this->base_model->get_join_item('result', 'posts.*, media.title as media_title, media.alt_text, media.dir, media.name', 'posts.id DESC', 'posts', 'media', 'posts.image=media.id', 'left', array('post_type' => $uri, 'publish' => 'yes'));
 
-        //$this->siteview('theme/article', $data);
+        $this->siteview('theme/article', $data);
         //genpi
-        $this->siteview('theme/genpi/' . $uri, $data);
+        //$this->siteview('theme/genpi/posts', $data);
     }
 
     public function _post($uri) {

@@ -13,12 +13,20 @@
     </div><br>
     <?php echo form_open('manage/config/general/upd_generalconfig', 'class="form-horizontal" style="padding-bottom: 50px; margin-bottom: 50px;"') ?>
     <div class="form-group">
-        <label class="col-sm-2 control-label text-align-left">Title</label>
+        <label class="col-sm-2 control-label text-align-left">Nama Situs</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="site_name" value="<?php echo $set['site_name'] ?>"> 
+
+        </div>
+        <label style="text-align: left" class="col-sm-3 control-label text-danger"><?php echo form_error('site_name') ?></label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label text-align-left">Judul Situs</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" name="site_title" value="<?php echo $set['site_title'] ?>"> 
 
         </div>
-        <label style="text-align: left" class="col-sm-3 control-label text-danger"><?php echo form_error('title_logo') ?></label>
+        <label style="text-align: left" class="col-sm-3 control-label text-danger"><?php echo form_error('site_title') ?></label>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label  text-align-left">Tagline</label>
@@ -28,14 +36,14 @@
         <label style="text-align: left" class="col-sm-3 control-label text-danger"><?php echo form_error('tagline') ?></label>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label  text-align-left">Site Keyword</label>
+        <label class="col-sm-2 control-label  text-align-left">Kata Kunci Situs</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" name="site_keyword" value="<?php echo $set['site_keyword'] ?>"> 
         </div>
         <label style="text-align: left" class="col-sm-3 control-label text-danger"><?php echo form_error('site_keyword') ?></label>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label  text-align-left">Site Description</label>
+        <label class="col-sm-2 control-label  text-align-left">Deskripsi Situs</label>
         <div class="col-sm-4">
             <textarea class="form-control text-area-control" rows="4" name="site_description"><?php echo $set['site_description'] ?></textarea> 
         </div>

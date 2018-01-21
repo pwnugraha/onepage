@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="icon" href="">
         <title>Onepage | Login</title>
 
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
         <link href="<?php echo base_url() ?>assets/onepage/css/bootstrap.min.css" rel="stylesheet"> 
         <link href="<?php echo base_url() ?>assets/onepage/css/font-awesome.min.css" rel="stylesheet">
         <link href="<?php echo base_url() ?>assets/azmind/css/form-elements.css" rel="stylesheet">
