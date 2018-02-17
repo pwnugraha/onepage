@@ -9,6 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
+        <meta name="robots" content="noindex, follow">
         <link rel="icon" href="">
         <title>Onepage | Admin</title>
 
@@ -129,9 +130,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <a href="<?php echo site_url('manage/other#') ?>"><i class="fa fa-align-justify"></i> <span class="nav-label">Lainnya</span><span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li><a <?php if ($this->uri->segment(3) == 'portofolio') { ?>
-                                                    class="active"<?php } ?> href="<?php echo site_url('manage/other/portofolio') ?>">Portofolio</a></li>
+                                                    class="active"<?php } ?> href="#">Portofolio</a></li>
                                         <li><a <?php if ($this->uri->segment(3) == 'service') { ?>
-                                                    class="active"<?php } ?> href="<?php echo site_url('manage/other/service') ?>">Service</a></li>
+                                                    class="active"<?php } ?> href="#">Service</a></li>
                                         <li><a <?php if ($this->uri->segment(3) == 'partner') { ?>
                                                     class="active"<?php } ?> href="<?php echo site_url('manage/other/partner') ?>">Partner</a></li>
                                     </ul>

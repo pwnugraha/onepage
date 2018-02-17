@@ -93,7 +93,8 @@
                     <textarea class="form-control" name="description" rows="3"><?php echo $image['description'] ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Link ke halaman lain(opsional)</label>
+                    <label class="control-label">Link ke halaman lain(opsional)</label><br>
+                    <code style="word-break: break-all">Contoh: https://example.com</code>
                     <input type="text" class="form-control" name="url" value="<?php echo $image['url'] ?>">
                 </div>
                 <div class="form-group">

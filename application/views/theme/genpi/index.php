@@ -6,9 +6,6 @@
                 <div class="mbr-section col-md-10 col-md-offset-1 text-xs-center">
                     <h1 class="mbr-section-title display-1"><?php echo $theme_contents_title[0]['value'] ?></h1>
                     <p class="mbr-section-lead lead"><?php echo $theme_contents[0]['value'] ?></p>
-                    <div class="mbr-section-btn"> 
-                        <a class="btn btn-lg btn-white-outline btn-white" href="#">DOWNLOAD </a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -39,7 +36,7 @@
                             <div class="thumbnail">
                                 <img src="<?php echo base_url($articles[0]['dir'] . $articles[0]['name']) ?>" alt="<?php echo $articles[0]['alt_text'] ?>" height="260px">
 
-                                <a href="<?php echo site_url('article/read/'.$articles[0]['rel_url'])?>"><span class="mbr-gallery-title"><?php echo (strlen($articles[0]['title']) > 20) ? mb_substr(ucwords($articles[0]['title']), 0, 20) . '...' : $articles[0]['title'] ?></span></a>
+                                <a href="<?php echo site_url($articles[0]['rel_url'])?>"><span class="mbr-gallery-title"><?php echo (strlen($articles[0]['title']) > 20) ? mb_substr(ucwords($articles[0]['title']), 0, 20) . '...' : $articles[0]['title'] ?></span></a>
                             </div>
                         </div>
                         <?php } if (!empty($articles[1])) { ?>
@@ -47,7 +44,7 @@
                             <div class="thumbnail">
                                 <img src="<?php echo base_url($articles[1]['dir'] . 'thumbnail/' . $articles[1]['name']) ?>"  alt="<?php echo $articles[1]['alt_text'] ?>">
                                 <div class="caption">
-                                    <h4><a style="color: #333333; text-decoration: none" href="<?php echo site_url('article/read/'.$articles[1]['rel_url'])?>"><?php echo (strlen($articles[1]['title']) > 20) ? mb_substr(ucwords($articles[1]['title']), 0, 20) . '...' : $articles[1]['title'] ?></a></h4>
+                                    <h4><a style="color: #333333; text-decoration: none" href="<?php echo site_url($articles[1]['rel_url'])?>"><?php echo (strlen($articles[1]['title']) > 20) ? mb_substr(ucwords($articles[1]['title']), 0, 20) . '...' : $articles[1]['title'] ?></a></h4>
                                     <?php echo (strlen($articles[1]['description']) > 63) ? mb_substr(ucwords($articles[1]['description']), 0, 63) . '...' : $articles[1]['description'] ?>
                                 </div>
                             </div>
@@ -59,9 +56,9 @@
                         <?php if (!empty($articles[2])) { ?>
                         <div class="col-xs-18 col-sm-6 col-md-4">
                             <div class="thumbnail">
-                                <img src="<?php echo base_url($articles[2]['dir'] . 'thumbnail/' . $articles[1]['name']) ?>"  alt="<?php echo $articles[2]['alt_text'] ?>">
+                                <img src="<?php echo base_url($articles[2]['dir'] . 'thumbnail/' . $articles[2]['name']) ?>"  alt="<?php echo $articles[2]['alt_text'] ?>">
                                <div class="caption">
-                                   <h4><a style="color: #333333; text-decoration: none" href="<?php echo site_url('article/read/'.$articles[2]['rel_url'])?>"><?php echo (strlen($articles[2]['title']) > 20) ? mb_substr(ucwords($articles[2]['title']), 0, 20) . '...' : $articles[2]['title'] ?></a></h4>
+                                   <h4><a style="color: #333333; text-decoration: none" href="<?php echo site_url($articles[2]['rel_url'])?>"><?php echo (strlen($articles[2]['title']) > 20) ? mb_substr(ucwords($articles[2]['title']), 0, 20) . '...' : $articles[2]['title'] ?></a></h4>
                                     <?php echo (strlen($articles[2]['description']) > 63) ? mb_substr(ucwords($articles[2]['description']), 0, 63) . '...' : $articles[2]['description'] ?>
                                 </div>
                             </div>
@@ -71,7 +68,7 @@
                             <div class="thumbnail">
                                 <img src="<?php echo base_url($articles[3]['dir'] . 'thumbnail/' . $articles[3]['name']) ?>"  alt="<?php echo $articles[3]['alt_text'] ?>">
                                 <div class="caption">
-                                   <h4><a style="color: #333333; text-decoration: none" href="<?php echo site_url('article/read/'.$articles[3]['rel_url'])?>"><?php echo (strlen($articles[3]['title']) > 20) ? mb_substr(ucwords($articles[3]['title']), 0, 20) . '...' : $articles[3]['title'] ?></a></h4>
+                                   <h4><a style="color: #333333; text-decoration: none" href="<?php echo site_url($articles[3]['rel_url'])?>"><?php echo (strlen($articles[3]['title']) > 20) ? mb_substr(ucwords($articles[3]['title']), 0, 20) . '...' : $articles[3]['title'] ?></a></h4>
                                     <?php echo (strlen($articles[3]['description']) > 63) ? mb_substr(ucwords($articles[3]['description']), 0, 63) . '...' : $articles[3]['description'] ?>
                                 </div>
                             </div>
@@ -81,7 +78,7 @@
                             <div class="thumbnail">
                                 <img src="<?php echo base_url($articles[4]['dir'] . 'thumbnail/' . $articles[4]['name']) ?>"  alt="<?php echo $articles[4]['alt_text'] ?>">
                                 <div class="caption">
-                                   <h4><a style="color: #333333; text-decoration: none" href="<?php echo site_url('article/read/'.$articles[4]['rel_url'])?>"><?php echo (strlen($articles[4]['title']) > 20) ? mb_substr(ucwords($articles[4]['title']), 0, 20) . '...' : $articles[4]['title'] ?></a></h4>
+                                   <h4><a style="color: #333333; text-decoration: none" href="<?php echo site_url($articles[4]['rel_url'])?>"><?php echo (strlen($articles[4]['title']) > 20) ? mb_substr(ucwords($articles[4]['title']), 0, 20) . '...' : $articles[4]['title'] ?></a></h4>
                                     <?php echo (strlen($articles[4]['description']) > 63) ? mb_substr(ucwords($articles[4]['description']), 0, 63) . '...' : $articles[4]['description'] ?>
                                 </div>
                             </div>

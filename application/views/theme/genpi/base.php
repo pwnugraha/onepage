@@ -8,6 +8,7 @@
         <meta name="generator" content="Mobirise v4.5.1, mobirise.com">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
         <meta name="description" content="<?php echo $sites['site_description'] ?>">
+        <meta name="robots" content="index, follow">
 
         <?php $this->load->view('meta/open_graph') ?>
 
@@ -26,23 +27,15 @@
 
     </head>
     <body>
-         <div id="fb-root"></div>
-        <script>(function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id))
-                    return;
-                js = d.createElement(s);
-                js.id = id;
-                js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
+        <div id="fb-root"></div>
+
         <section id="menu-a" data-rv-view="19">
             <nav class="navbar navbar-dropdown transparent navbar-fixed-top bg-color" style="<?php echo (!in_array($this->uri->segment(1), array('article'))) ? '' : 'background: #2969b0 !important;' ?>">
                 <div class="container">
                     <div class="mbr-table">
                         <div class="mbr-table-cell">
                             <div class="navbar-brand">
-                                <?php if (!$brand || $brand['autoload']!='yes') { ?>
+                                <?php if (!$brand || $brand['autoload'] != 'yes') { ?>
                                     <a class="navbar-caption" href="<?php echo site_url() ?>"><?php echo $sites['site_title'] ?></a>
                                 <?php } else { ?>
                                     <span class="navbar-logo">
@@ -58,15 +51,18 @@
                                 <div class="hamburger-icon"></div>
                             </button>
                             <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-xl" id="exCollapsingNavbar">
-                                <li class="nav-item">
-                                    <a class="nav-link link" href="#">OVERVIEW</a>
-                                </li>
                                 <li class="nav-item"><a class="nav-link link" href="<?php echo site_url('article') ?>">Artikel</a></li>
                                 <li class="nav-item"><a class="nav-link link" href="<?php echo site_url('image') ?>">Image</a></li>
                                 <li class="nav-item"><a class="nav-link link" href="<?php echo site_url('video') ?>">Video</a></li>
-                                <?php foreach ($pages as $page) { ?>
-                                    <li class="nav-item"><a class="nav-link link" href="<?php echo site_url($page['rel_url']) ?>" class="text-white"><?php echo $page['title'] ?></a></li>
-                                <?php } ?>
+                                <?php
+                                if (!empty($pages)) {
+                                    foreach ($pages as $page) {
+                                        ?>
+                                        <li class="nav-item"><a class="nav-link link" href="<?php echo site_url($page['rel_url']) ?>" class="text-white"><?php echo $page['title'] ?></a></li>
+                                        <?php
+                                    }
+                                }
+                                ?>
                             </ul>
                             <button hidden="" class="navbar-toggler navbar-close" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
                                 <div class="close-icon"></div>
@@ -101,7 +97,15 @@
         <script src="<?php echo base_url('assets/genpi/') ?>assets/mobirise-gallery/player.min.js"></script>
         <script src="<?php echo base_url('assets/genpi/') ?>assets/mobirise-gallery/script.js"></script>
 
-
+        <script>(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
         <input name="animation" type="hidden">
     </body>
 </html>

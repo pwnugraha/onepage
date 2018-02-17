@@ -9,6 +9,7 @@
         <meta name="generator" content="Mobirise v4.5.1, mobirise.com">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
         <meta name="description" content="<?php echo $sites['site_description'] ?>">
+        <meta name="robots" content="index, follow">
 
         <?php $this->load->view('meta/open_graph') ?>
 
@@ -78,11 +79,12 @@
                         if (!empty($pages)) {
                             foreach ($pages as $page) {
                                 ?>
-                                <li class="nav-item"><a class="nav-link link text-white display-4" href="<?php echo site_url('informasi/read/' . $page['rel_url']) ?>" class="text-white"><?php echo $page['title'] ?></a></li>
+                                <li class="nav-item"><a class="nav-link link text-white display-4" href="<?php echo site_url($page['rel_url']) ?>" class="text-white"><?php echo $page['title'] ?></a></li>
                                 <?php
                             }
                         }
                         ?>
+                        <li class="nav-item"><a class="nav-link link text-white display-4" href="<?php echo site_url('demo/theme/laundry-inv2') ?>">Laundry-inV2</a></li>
                     </ul>
                 </div>
             </nav>
@@ -105,7 +107,7 @@
                             if (!empty($pages)) {
                                 foreach ($pages as $page) {
                                     ?>
-                                    <br><a href="<?php echo site_url('informasi/read/' . $page['rel_url']) ?>" class="text-white"><?php echo $page['title'] ?></a>
+                                    <br><a href="<?php echo site_url($page['rel_url']) ?>" class="text-white"><?php echo $page['title'] ?></a>
                                     <?php
                                 }
                             }
@@ -113,7 +115,7 @@
                     </div>
                     <div class="col-md-4 col-sm-8">
                         <p class="mb-4 foot-title mbr-fonts-style display-7">Artikel Terbaru</p>
-                        <a style="color: #ffffff" href="<?php echo site_url('article/read/' . $article['rel_url']) ?>"><?php echo (strlen($article['description']) > 200) ? mb_substr(ucwords($article['description']), 0, 200) . '...' : $article['description'] ?></a>
+                        <a style="color: #ffffff" href="<?php echo site_url($article['rel_url']) ?>"><?php echo (strlen($article['description']) > 200) ? mb_substr(ucwords($article['description']), 0, 200) . '...' : $article['description'] ?></a>
                     </div>
                     <div class="col-md-4 offset-md-1 col-sm-12">
                         <p class="mb-4 foot-title mbr-fonts-style display-7">Contact Us</p>

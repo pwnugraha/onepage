@@ -24,8 +24,8 @@ class Pmail {
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = 'lab.gomein@gmail.com';                 // SMTP username
             $mail->Password = 'gomelab26';                           // SMTP password
-            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-            $mail->Port = 587;                                    // TCP port to connect to
+            $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+            $mail->Port = 465;                                    // TCP port to connect to
             //Recipients
             $mail->setFrom($params['from_email'], $params['from_name']);
             $mail->addAddress($params['to']);               // Name is optional
